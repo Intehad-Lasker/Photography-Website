@@ -543,9 +543,6 @@ body {
     color: white;
 }
 
-.gallery-item:hover {
-    transform: scale(1.05);
-}
 
 /* ✅ Fix: Make Hover Effect on Gallery Page Smoother */
 .gallery-image {
