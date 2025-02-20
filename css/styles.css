@@ -448,8 +448,8 @@ body {
 .about-header {
     width: 100%;
     text-align: center;
-    background-color: red;
-    color: black;
+    background-color: #222; /* Same gray as header */
+    color: red;
     padding: 25px;
     font-size: 34px;
     font-weight: bold;
@@ -464,20 +464,15 @@ body {
     padding: 40px;
 }
 
-/* Red Containers */
+/* Gray Containers */
 .about-section {
-    background-color: rgba(255, 0, 0, 0.9); /* Red background */
+    background-color: #222; /* Same gray as header */
     color: white;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(255, 0, 0, 0.5);
-    width: 45%; /* Two-column layout */
-    text-align: center;
-}
-
-/* Full width for About Me title */
-.about-section:first-child {
-    width: 100%;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+    width: 60%; /* Adjust width for best readability */
+    text-align: left;
 }
 
 /* Ensure Lists are readable */
