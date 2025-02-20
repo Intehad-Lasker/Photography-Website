@@ -523,3 +523,30 @@ body {
     }
 }
 
+/* Gray Box Styling - Only for About & Contact Pages */
+.about-section, 
+.contact-section {
+    background-color: #222; /* Same gray as header */
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+    width: 60%;
+    text-align: center;
+    margin: 50px auto; /* Centers it */
+    transition: transform 0.3s ease-in-out; /* Smooth effect */
+}
+
+/* Hover Effect - Slight Enlargement */
+.about-section:hover, 
+.contact-section:hover {
+    transform: scale(1.02);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .about-section, 
+    .contact-section {
+        width: 90%;
+    }
+}
