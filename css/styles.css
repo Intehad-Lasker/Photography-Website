@@ -423,11 +423,11 @@ nav ul li a.active {
     background: darkgreen;
 }
 
-/* Move Navigation Below Title on Mobile & Keep It Horizontal */
+/* Ensure Navigation is Fully Horizontal & Adjust Font Size on Mobile */
 @media (max-width: 768px) {
     header {
         display: flex;
-        flex-direction: column; /* Stack items */
+        flex-direction: column; /* Stack title and nav */
         align-items: center;
         text-align: center;
     }
@@ -435,17 +435,18 @@ nav ul li a.active {
     nav ul {
         display: flex;
         justify-content: center;
-        gap: 20px;
+        gap: 10px;
         padding-top: 10px;
-        flex-wrap: wrap; /* Ensures it stays horizontal but wraps if needed */
+        flex-wrap: nowrap; /* Prevents wrapping */
     }
 
     nav ul li {
         display: inline-block;
+        white-space: nowrap; /* Prevents breaking into a new line */
     }
 
     nav ul li a {
-        padding: 10px 15px; /* Adjust padding for mobile */
-        font-size: 16px; /* Slightly smaller font */
+        padding: 8px 12px; /* Adjust padding */
+        font-size: 14px; /* Smaller font on mobile */
     }
 }
