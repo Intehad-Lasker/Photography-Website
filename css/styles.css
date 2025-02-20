@@ -647,30 +647,3 @@ body {
     }
 }
 
-/* Fix category titles (Sky, City, Nature, etc.) */
-.page-title {
-    text-align: center;
-    font-size: 28px;
-    color: white;
-    margin-top: 80px; /* Ensures consistent top spacing */
-    padding-top: 20px; /* Prevents it from touching the top */
-}
-
-/* Additional fix in case city.html title isn't affected */
-.city-page .page-title {
-    margin-top: 80px !important;
-    padding-top: 20px !important;
-}
-
-/* Ensure gallery and category pages have consistent spacing */
-.section-container {
-    margin-top: 80px; /* Uniform top spacing */
-}
-
-/* Mobile Fix */
-@media (max-width: 768px) {
-    .page-title {
-        margin-top: 100px; /* Adds more spacing for small screens */
-        padding-top: 30px;
-    }
-}
