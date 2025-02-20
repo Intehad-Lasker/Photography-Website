@@ -644,11 +644,24 @@ body {
     }
 }
 
-/* Smooth Hover Effect for Gallery Images (Same as About Me Gray Boxes) */
+/* Smooth Hover Effect for Gallery Images */
 .gallery-item {
-    transition: transform 0.3s ease-in-out; /* Smooth scaling */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth scaling and shadow */
 }
 
 .gallery-item:hover {
-    transform: scale(1.02); /* Subtle zoom effect */
+    transform: scale(1.02); /* Slight zoom effect */
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1); /* Adds subtle depth */
+}
+
+/* Smooth Hover Effect for Category Images */
+.image-container img {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+    border-radius: 10px; /* Ensures corners stay rounded */
+}
+
+.image-container img:hover {
+    transform: scale(1.02); /* Slight zoom */
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1); /* Adds depth */
+    border-radius: 10px; /* Keeps the corners rounded */
 }
