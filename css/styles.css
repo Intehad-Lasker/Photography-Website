@@ -624,14 +624,34 @@ body {
     box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2); /* Adds subtle depth */
 }
 
-/* Ensure Category Page Images Have the Same Hover Effect as Gallery Images */
+
+
+/* Smooth Hover Effect for Gallery Images */
+.gallery-image img {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+    border-radius: 10px; /* Ensures corners stay rounded */
+}
+
+.gallery-image img:hover {
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2); /* Adds subtle depth */
+
+    /* Smooth Hover Effect for Gallery Images */
 .image-container img {
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out;
-    border-radius: 10px; /* Keep corners rounded */
+    border-radius: 10px; /* Ensures corners stay rounded */
 }
 
 .image-container img:hover {
     transform: scale(1.05); /* Slight zoom effect */
-    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3); /* Same glow effect as gallery */
-    border-radius: 10px; /* Keep corners rounded */
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2); /* Adds subtle depth */
+
+        /* Smooth Hover Effect for Gallery Images */
+.gallery-image {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+    border-radius: 10px; /* Ensures corners stay rounded */
 }
+
+.gallery-image img:hover {
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2); /* Adds subtle depth */
