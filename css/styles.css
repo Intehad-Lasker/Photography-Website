@@ -222,16 +222,6 @@ main {
     margin: 0 auto;
 }
 
-/* Image Containers */
-.image-container {
-    display: inline-block;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 15px;
-}
-
-
 
 /* Ensure Header Doesn't Overlap Content */
 header {
@@ -636,3 +626,4 @@ body {
     opacity: 0.8; /* Slight transparency */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Adds a shadow effect */
 }
+
