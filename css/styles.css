@@ -1,4 +1,4 @@
-/* Import Modern Font */
+/* Import Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap');
 
 /* === GENERAL STYLING === */
@@ -12,6 +12,11 @@ body {
     flex-direction: column;
     min-height: 100vh;
     box-sizing: border-box;
+
+    /* 🔹 Fix blurry text */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 /* === HEADER STYLING === */
@@ -47,12 +52,21 @@ nav ul li a {
     font-weight: 600;
     padding: 10px 20px;
     border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+    display: inline-block;
 }
 
+/* Active Page */
 nav ul li a.active {
     background-color: red;
     color: black;
+    transform: scale(1.1);
+}
+
+/* Hover Effect */
+nav ul li a:hover {
+    color: red;
+    transform: scale(1.1);
 }
 
 /* === HERO SECTION === */
@@ -103,6 +117,7 @@ footer {
     margin-top: auto;
 }
 
+/* Footer Links */
 footer a {
     color: red;
     text-decoration: none;
@@ -118,18 +133,23 @@ footer a:hover {
     text-align: center;
 }
 
-.gallery h2 {
-    color: red;
-    font-size: 32px;
+/* Gallery Titles */
+.page-title {
+    text-align: center;
+    font-size: 28px;
+    color: white;
+    margin-top: 50px; /* Add space below the header */
+    padding-top: 20px;
 }
 
 /* Gallery Grid */
 .gallery-sections {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
-    max-width: 90%;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 15px;
+    max-width: 95%;
     margin: auto;
+    padding-bottom: 50px;
 }
 
 /* Gallery Items */
@@ -138,7 +158,7 @@ footer a:hover {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    transition: 0.3s;
+    transition: transform 0.3s ease-in-out;
     text-decoration: none;
     color: white;
 }
@@ -150,203 +170,78 @@ footer a:hover {
 /* Gallery Images */
 .gallery-item img, .gallery img {
     width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 5px;
-    transition: transform 0.3s;
-}
-
-.gallery-item h3 {
-    margin-top: 10px;
-    font-size: 22px;
-    color: white;
-}
-
-.gallery-item h3:hover {
-    color: red;
-}
-
-/* === ABOUT PAGE === */
-.about {
-    max-width: 900px;
-    margin: auto;
-    text-align: left;
-}
-
-.about h2 {
-    color: red;
-    font-size: 28px;
-}
-
-.about p {
-    font-size: 18px;
-    line-height: 1.6;
-}
-
-/* === CONTACT PAGE === */
-#contact {
-    text-align: center;
-}
-
-.section-container a {
-    color: #ff6666;
-    font-weight: bold;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.section-container a:hover {
-    color: white;
-}
-
-/* === FOOTER POSITION FIX === */
-html, body {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-main {
-    flex: 1;
-}
-
-/* === PAGE STYLING === */
-.gallery-title {
-    font-size: 28px;
-    text-align: center;
-    color: red;
-}
-
-/* Pinterest-style masonry grid */
-.gallery-grid {
-    column-count: 3;
-    column-gap: 15px;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Image Containers */
-.image-container {
-    display: inline-block;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 15px;
-}
-
-/* Image Styling */
-.gallery-image {
-    width: 100%;
-    border-radius: 10px;
-    transition: box-shadow 0.3s;
-    display: block;
-}
-
-/* Hover Effect - Remove Scaling */
-.gallery-image:hover {
-    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
-    cursor: pointer;
-}
-
-/* Ensure Header Doesn't Overlap Content */
-header {
-    z-index: 9999;
-}
-
-/* Ensure the title stays fixed in place */
-.section-container h2 {
-    margin-top: 40px; /* Increase spacing from header */
-    padding-bottom: 20px; /* Adds space below the quote */
-    text-align: center;
-}
-
-/* Prevent images from affecting layout */
-.gallery-grid {
-    padding-top: 20px; /* Adds extra space to ensure images don't push text */
-}
-
-/* Prevent h2 from moving when hovering over images */
-.format-page .section-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* Keep spacing between header and title stable */
-.format-page .section-container h2 {
-    position: relative;
-    top: 10px;
-    transition: none; /* Prevents movement when hovering */
-}
-
-/* Adjust the gallery grid for larger images */
-.gallery-sections {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Larger images */
-    gap: 15px; /* Slightly reduced gap */
-    max-width: 95%;
-    margin: auto;
-    padding-bottom: 50px; /* Prevents button from sticking to images */
-}
-
-/* Ensure gallery images are larger and fill the space */
-.gallery-item img {
-    width: 100%;
-    height: 350px; /* Taller images */
+    height: 350px;
     object-fit: cover;
     border-radius: 5px;
     transition: transform 0.3s ease-in-out;
 }
 
-/* View Gallery Button */
-.view-gallery-btn {
+.gallery-item img:hover {
+    transform: scale(1.05);
+}
+
+/* === ABOUT PAGE === */
+.about-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    margin: 40px auto;
-    padding: 15px 40px;
-    font-size: 20px;
-    font-weight: bold;
-    background-color: red;
-    color: black;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: transform 0.3s ease-in-out, background-color 0.3s;
-    width: fit-content;
+    padding: 70px 0; /* Reduced spacing */
 }
 
-/* Button Hover Effect */
-.view-gallery-btn:hover {
-    background-color: darkred;
-    transform: scale(1.1);
-}
-
-/* Default Navigation Link */
-nav ul li a {
+/* Individual About Section Boxes */
+.about-section {
+    background-color: #222; /* Gray background */
     color: white;
-    text-decoration: none !important;
-    font-size: 18px;
-    font-weight: 600;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s, transform 0.2s;
-    display: inline-block;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+    width: 70%;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 15px; /* Reduced space */
 }
 
-/* Hover Effect - Turns Text Red & Enlarges */
-nav ul li a:hover {
-    color: red; /* Highlights text in red */
-    transform: scale(1.1); /* Slightly enlarges */
+/* Hover Effect */
+.about-section:hover {
+    transform: scale(1.02);
 }
 
-/* If Active (Current Page) - Keep Red Box But Only Enlarge */
-nav ul li a.active {
-    background-color: red; /* Red background */
-    color: black; /* Keep text black */
-    border-radius: 5px;
-    transform: scale(1.1); /* Enlarge */
+/* === CONTACT PAGE === */
+.contact-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 40px;
+}
+
+/* Gray Box Styling for Contact Section */
+.contact-section {
+    background-color: #222; /* Gray Background */
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+    width: 60%;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.contact-section:hover {
+    transform: scale(1.02);
+}
+
+/* Contact Page Links */
+.contact-section a {
+    color: red;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.contact-section a:hover {
+    color: white;
 }
 
 /* Lightbox Styling */
@@ -357,12 +252,13 @@ nav ul li a.active {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8); /* Dim Background */
+    background: rgba(0, 0, 0, 0.8);
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
+/* Lightbox Image */
 .lightbox img {
     max-width: 90%;
     max-height: 90%;
@@ -380,7 +276,7 @@ nav ul li a.active {
     cursor: pointer;
 }
 
-/* Download Button - GREEN */
+/* Download Button */
 .download-btn {
     display: block;
     position: absolute;
@@ -399,210 +295,24 @@ nav ul li a.active {
     background: darkgreen;
 }
 
-/* Ensure Navigation is Fully Horizontal & Adjust Font Size on Mobile */
+/* === RESPONSIVE DESIGN === */
 @media (max-width: 768px) {
-    header {
-        display: flex;
-        flex-direction: column; /* Stack title and nav */
-        align-items: center;
-        text-align: center;
-    }
-
-    nav ul {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        padding-top: 10px;
-        flex-wrap: nowrap; /* Prevents wrapping */
-    }
-
-    nav ul li {
-        display: inline-block;
-        white-space: nowrap; /* Prevents breaking into a new line */
-    }
-
-    nav ul li a {
-        padding: 8px 12px; /* Adjust padding */
-        font-size: 14px; /* Smaller font on mobile */
-    }
-}
-
-body {
-    font-family: 'Montserrat', sans-serif;
-    margin: 0;
-    padding-top: 80px;
-    background-color: #000;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    box-sizing: border-box;
-
-    /* 🔹 Fix blurry text */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-}
-
-
-/* Centered About Me Sections */
-.about-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    padding: 40px;
-}
-
-/* Gray Containers */
-.about-section {
-    background-color: #222; /* Same gray as header */
-    color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
-    width: 60%; /* Adjust width for best readability */
-    text-align: left;
-}
-
-/* Ensure Lists are readable */
-.about-section ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.about-section ul li {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-    .about-section {
-        width: 90%; /* Full-width sections on mobile */
-    }
-}
-
-
-/* Centered Contact Page Layout */
-.contact-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding: 40px;
-}
-
-/* Gray Box Styling for Contact Section */
-.contact-section {
-    background-color: #222; /* Same gray as header */
-    color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
-    width: 60%;
-    text-align: center;
-}
-
-/* Contact Page Links */
-.contact-section a {
-    color: red;
-    font-weight: bold;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.contact-section a:hover {
-    color: white;
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-    .contact-section {
+    .about-section, .contact-section {
         width: 90%;
+        padding: 20px;
     }
-}
 
-/* ✅ Fix: Add spacing to titles (Gallery Page & Individual Pages) */
-.page-title {
-    text-align: center;
-    font-size: 28px;
-    color: white;
-    margin-top: 50px; /* Add space below the header */
-    padding-top: 20px; /* Ensures space even if margin collapses */
-}
-
-/* ✅ Fix: Restore Hover Effect for Individual Pages (sky.html, sunset.html, etc.) */
-.gallery-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    transition: transform 0.3s ease-in-out; /* Smooth effect */
-    text-decoration: none;
-    color: white;
-}
-
-.gallery-item:hover {
-    transform: scale(1.05);
-}
-
-/* ✅ Fix: Make Hover Effect on Gallery Page Smoother */
-.gallery-image {
-    width: 100%;
-    border-radius: 10px;
-    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out; /* Smooth transition */
-    display: block;
-}
-
-.gallery-image:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
-    cursor: pointer;
-}
-
-/* ✅ Ensure Padding on Mobile Doesn't Break Layout */
-@media (max-width: 768px) {
     .page-title {
         margin-top: 70px;
         padding-top: 25px;
     }
-    .gallery-item {
-        width: 100%;
+
+    nav ul {
+        gap: 10px;
     }
-}
 
-
-/* About Section Styling */
-.about-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 90px 0; /* Reduced padding */
-}
-
-/* Individual About Section Boxes */
-.about-section {
-    background-color: #222; /* Gray background */
-    color: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
-    width: 70%;
-    text-align: center;
-    transition: transform 0.3s ease-in-out;
-    margin-bottom: 15px; /* REDUCED GAP */
-}
-
-/* Hover Effect */
-.about-section:hover {
-    transform: scale(1.02);
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-    .about-section {
-        width: 90%;
-        padding: 20px;
+    nav ul li a {
+        padding: 8px 12px;
+        font-size: 14px;
     }
 }
