@@ -272,6 +272,9 @@ header {
 }
 
 /* Remove Red Border & Dark Red Background in Specific Pages */
+
+.about-page .section-container,
+.contact-page .section-container,
 .format-page .section-container,
 .gallery-page .section-container {
     background-color: transparent !important;
