@@ -113,23 +113,6 @@ footer a:hover {
     color: white;
 }
 
-/* === CONTENT SECTION CONTAINER === */
-.section-container {
-    max-width: 1200px;
-    margin: 50px auto;
-    padding: 30px;
-    background-color: rgba(255, 0, 0, 0.1);
-    border: 3px solid red;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.4);
-    transition: transform 0.3s ease-in-out;
-}
-
-.section-container:hover {
-    transform: scale(1.02);
-}
-
 /* === GALLERY PAGE === */
 .gallery {
     text-align: center;
@@ -271,16 +254,6 @@ header {
     z-index: 9999;
 }
 
-/* Remove Red Border & Dark Red Background in Specific Pages */
-
-.about-page .section-container,
-.contact-page .section-container,
-.format-page .section-container,
-.gallery-page .section-container {
-    background-color: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-}
 /* Ensure the title stays fixed in place */
 .section-container h2 {
     margin-top: 40px; /* Increase spacing from header */
