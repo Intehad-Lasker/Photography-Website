@@ -180,16 +180,6 @@ footer a:hover {
     line-height: 1.6;
 }
 
-.gallery-image img {
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out;
-    border-radius: 10px; /* Ensures corners stay rounded */
-}
-
-.gallery-image img:hover {
-    transform: scale(1.05); /* Slight zoom effect */
-    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2); /* Adds subtle depth */
-}
-
 
 /* === CONTACT PAGE === */
 #contact {
@@ -627,3 +617,12 @@ body {
 }
 
 
+.gallery-image img {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+    border-radius: 10px; /* Ensures corners stay rounded */
+}
+
+.gallery-image img:hover {
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2); /* Adds subtle depth */
+}
