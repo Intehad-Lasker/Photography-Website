@@ -578,7 +578,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px 0; /* Reduced padding */
+    padding: 90px 0; /* Reduced padding */
 }
 
 /* Individual About Section Boxes */
