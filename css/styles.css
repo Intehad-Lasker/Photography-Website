@@ -523,29 +523,3 @@ body {
     }
 }
 
-/* Gray Box Styling (About Me & Contact Sections) */
-.contact-section, 
-.section-container {
-    background-color: #222; /* Same gray as header */
-    color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
-    width: 60%;
-    text-align: center;
-    transition: transform 0.3s ease-in-out; /* Smooth effect */
-}
-
-/* Hover Effect - Slight Enlargement */
-.contact-section:hover, 
-.section-container:hover {
-    transform: scale(1.02);
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-    .contact-section, 
-    .section-container {
-        width: 90%;
-    }
-}
