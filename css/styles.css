@@ -214,6 +214,15 @@ main {
     color: red;
 }
 
+/* ✅ Fix Category Page Image Hover & Formatting */
+.image-container {
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px; /* Ensures rounded corners */
+}
+
 /* Pinterest-style masonry grid */
 .gallery-grid {
     column-count: 3;
@@ -273,6 +282,21 @@ header {
     border-radius: 5px;
     transition: transform 0.3s ease-in-out;
 }
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px; /* Ensures images start with rounded corners */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+}
+
+.image-container img:hover {
+    transform: scale(1.05); /* Subtle zoom effect */
+    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3); /* Soft glow */
+    border-radius: 10px; /* Keeps corners rounded even when zoomed */
+}
+
 
 /* View Gallery Button */
 .view-gallery-btn {
@@ -616,35 +640,4 @@ body {
 }
 
 
-/* ✅ Fix Category Page Image Hover & Formatting */
-.image-container {
-    display: inline-block;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    border-radius: 10px; /* Ensures rounded corners */
-}
 
-.image-container img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 10px; /* Ensures images start with rounded corners */
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out;
-}
-
-.image-container img:hover {
-    transform: scale(1.05); /* Subtle zoom effect */
-    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3); /* Soft glow */
-    border-radius: 10px; /* Keeps corners rounded even when zoomed */
-}
-
-/* ✅ Ensure Proper Spacing Between Images */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-    gap: 15px; /* Space between images */
-    max-width: 90%;
-    margin: auto;
-    padding: 20px 0; /* Adjusts spacing */
-}
