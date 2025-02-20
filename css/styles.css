@@ -651,3 +651,14 @@ body {
     box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2); /* Adds subtle depth */
 }
 
+/* Ensure Category Page Images Keep Rounded Corners on Hover */
+.image-container img {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+    border-radius: 10px; /* Keep corners rounded */
+}
+
+.image-container img:hover {
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2); /* Adds subtle depth */
+    border-radius: 10px; /* Prevents corners from turning square */
+}
