@@ -450,3 +450,39 @@ nav ul li a.active {
         font-size: 14px; /* Smaller font on mobile */
     }
 }
+
+/* Center About Me Content */
+.about-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  /* Centers vertically */
+    align-items: center;      /* Centers horizontally */
+    text-align: center;
+    min-height: 80vh;  /* Ensures it takes up most of the screen */
+    max-width: 800px;  /* Limits text width for readability */
+    margin: auto;
+    padding: 20px;
+}
+
+/* Adjust font size and spacing */
+.about-container h2,
+.about-container h3 {
+    color: red;
+    margin-bottom: 10px;
+}
+
+.about-container p {
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 600px;
+}
+
+.about-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.about-container ul li {
+    font-size: 18px;
+    margin: 8px 0;
+}
