@@ -444,16 +444,6 @@ body {
     text-rendering: optimizeLegibility;
 }
 
-/* Full-Width About Me Header */
-.about-header {
-    width: 100%;
-    text-align: center;
-    background-color: #222; /* Same gray as header */
-    color: red;
-    padding: 25px;
-    font-size: 34px;
-    font-weight: bold;
-}
 
 /* Centered About Me Sections */
 .about-container {
