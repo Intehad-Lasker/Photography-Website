@@ -606,3 +606,12 @@ body {
         padding: 20px;
     }
 }
+
+.contact-section {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.contact-section:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 6px 15px rgba(255, 255, 255, 0.15);
+}
