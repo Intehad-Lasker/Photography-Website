@@ -9,9 +9,9 @@
 <body>
     <header>
         <h1>BazzPhotography</h1>
-        <div class="menu-icon">☰</div> <!-- Mobile Menu Button -->
+        <div class="menu-icon" id="mobile-menu">☰</div> <!-- Mobile Menu Button -->
         <nav>
-            <ul>
+            <ul id="nav-menu">
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="gallery.html">Gallery</a></li>
                 <li><a href="about.html">About</a></li>
@@ -34,8 +34,8 @@
 
     <!-- JavaScript for Mobile Menu & Hide Header on Image Expansion -->
     <script>
-        document.querySelector(".menu-icon").addEventListener("click", function () {
-            document.querySelector("nav ul").classList.toggle("show");
+        document.getElementById("mobile-menu").addEventListener("click", function () {
+            document.getElementById("nav-menu").classList.toggle("show");
         });
 
         let lastScrollTop = 0;
@@ -50,10 +50,10 @@
         // Hide header when viewing an expanded image
         document.addEventListener("click", function (event) {
             if (event.target.classList.contains("gallery-image")) {
-                document.querySelector("header").style.display = "none";
+                document.querySelector("header").classList.add("hidden");
             }
             if (event.target.classList.contains("close")) {
-                document.querySelector("header").style.display = "flex";
+                document.querySelector("header").classList.remove("hidden");
             }
         });
     </script>
