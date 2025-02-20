@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - BazzPhotography</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="gallery-page">
+    <header>
+        <h1>BazzPhotography</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html" class="active">Gallery</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section-container">
+            <h2>Discover more, explore deeper.</h2>
+            <div class="gallery-sections">
+                
+                <a href="sky.html" class="gallery-item">
+                    <img src="images/sky.jpg" alt="Sky Photography">
+                    <h3>Endless Horizon</h3>
+                </a>
+                <a href="nature.html" class="gallery-item">
+                    <img src="images/nature.jpg" alt="Nature Photography">
+                    <h3>Earth’s Embrace</h3>
+                </a>
+                <a href="city.html" class="gallery-item">
+                    <img src="images/city.jpg" alt="City Photography">
+                    <h3>Lights & Chaos</h3>
+                </a>
+                <a href="sunsets.html" class="gallery-item">
+                    <img src="images/sunset.jpg" alt="Sunsets Photography">
+                    <h3>Fire in the Sky</h3>
+                </a>
+                <a href="buildings.html" class="gallery-item">
+                    <img src="images/buildings.jpg" alt="Buildings Photography">
+                    <h3>Architects' Vision</h3>
+                </a>
+                <a href="rain.html" class="gallery-item">
+                    <img src="images/rain.jpg" alt="Rain Photography">
+                    <h3>Whispers of the Storm</h3>
+                </a>
+                <a href="snow.html" class="gallery-item">
+                    <img src="images/snow.jpg" alt="Snow Photography">
+                    <h3>Frozen Silence</h3>
+                </a>
+                <a href="ocean.html" class="gallery-item">
+                    <img src="images/ocean.jpg" alt="Ocean Photography">
+                    <h3>Eternal Blue</h3>
+                </a>
+                <a href="cars.html" class="gallery-item">
+                    <img src="images/cars.jpg" alt="all Photography">
+                    <h3>The Road’s Reflection</h3>
+                </a>
+                
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 BazzPhotography</p>
+    </footer>
+    <script>
+        let lastScrollTop = 0;
+        const header = document.querySelector("header");
+    
+        window.addEventListener("scroll", function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                // Hide header on scroll down
+                header.style.top = "-80px"; 
+            } else {
+                // Show header when scrolling up
+                header.style.top = "0";
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+    
+
+</body>
+</html>

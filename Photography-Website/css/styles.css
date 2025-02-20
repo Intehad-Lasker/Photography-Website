@@ -1,0 +1,424 @@
+/* Import Modern Font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap');
+
+/* === GENERAL STYLING === */
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding-top: 80px;
+    background-color: #000;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* === HEADER STYLING === */
+header {
+    background-color: #222;
+    color: red;
+    padding: 15px 50px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    transition: top 0.3s ease-in-out;
+}
+
+/* === NAVIGATION BAR === */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+nav ul li a.active {
+    background-color: red;
+    color: black;
+}
+
+/* === HERO SECTION === */
+.hero {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url('../images/hero.jpg') center/cover no-repeat;
+    padding: 40px;
+}
+
+.hero h2 {
+    font-size: 40px;
+    color: red;
+}
+
+.hero p {
+    font-size: 20px;
+}
+
+/* === BUTTON STYLING === */
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: red;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: darkred;
+    transform: scale(1.1);
+}
+
+/* === FOOTER === */
+footer {
+    background-color: black;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    margin-top: auto;
+}
+
+footer a {
+    color: red;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    color: white;
+}
+
+/* === CONTENT SECTION CONTAINER === */
+.section-container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: rgba(255, 0, 0, 0.1);
+    border: 3px solid red;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.4);
+    transition: transform 0.3s ease-in-out;
+}
+
+.section-container:hover {
+    transform: scale(1.02);
+}
+
+/* === GALLERY PAGE === */
+.gallery {
+    text-align: center;
+}
+
+.gallery h2 {
+    color: red;
+    font-size: 32px;
+}
+
+/* Gallery Grid */
+.gallery-sections {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    max-width: 90%;
+    margin: auto;
+}
+
+/* Gallery Items */
+.gallery-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: 0.3s;
+    text-decoration: none;
+    color: white;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+/* Gallery Images */
+.gallery-item img, .gallery img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: transform 0.3s;
+}
+
+.gallery-item h3 {
+    margin-top: 10px;
+    font-size: 22px;
+    color: white;
+}
+
+.gallery-item h3:hover {
+    color: red;
+}
+
+/* === ABOUT PAGE === */
+.about {
+    max-width: 900px;
+    margin: auto;
+    text-align: left;
+}
+
+.about h2 {
+    color: red;
+    font-size: 28px;
+}
+
+.about p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* === CONTACT PAGE === */
+#contact {
+    text-align: center;
+}
+
+.section-container a {
+    color: #ff6666;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.section-container a:hover {
+    color: white;
+}
+
+/* === FOOTER POSITION FIX === */
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* === PAGE STYLING === */
+.gallery-title {
+    font-size: 28px;
+    text-align: center;
+    color: red;
+}
+
+/* Pinterest-style masonry grid */
+.gallery-grid {
+    column-count: 3;
+    column-gap: 15px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Image Containers */
+.image-container {
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+/* Image Styling */
+.gallery-image {
+    width: 100%;
+    border-radius: 10px;
+    transition: box-shadow 0.3s;
+    display: block;
+}
+
+/* Hover Effect - Remove Scaling */
+.gallery-image:hover {
+    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+}
+
+/* Ensure Header Doesn't Overlap Content */
+header {
+    z-index: 9999;
+}
+
+/* Remove Red Border & Dark Red Background in Specific Pages */
+.format-page .section-container,
+.gallery-page .section-container {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+/* Ensure the title stays fixed in place */
+.section-container h2 {
+    margin-top: 40px; /* Increase spacing from header */
+    padding-bottom: 20px; /* Adds space below the quote */
+    text-align: center;
+}
+
+/* Prevent images from affecting layout */
+.gallery-grid {
+    padding-top: 20px; /* Adds extra space to ensure images don't push text */
+}
+
+/* Prevent h2 from moving when hovering over images */
+.format-page .section-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Keep spacing between header and title stable */
+.format-page .section-container h2 {
+    position: relative;
+    top: 10px;
+    transition: none; /* Prevents movement when hovering */
+}
+
+/* Adjust the gallery grid for larger images */
+.gallery-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Larger images */
+    gap: 15px; /* Slightly reduced gap */
+    max-width: 95%;
+    margin: auto;
+    padding-bottom: 50px; /* Prevents button from sticking to images */
+}
+
+/* Ensure gallery images are larger and fill the space */
+.gallery-item img {
+    width: 100%;
+    height: 350px; /* Taller images */
+    object-fit: cover;
+    border-radius: 5px;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* View Gallery Button */
+.view-gallery-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px auto;
+    padding: 15px 40px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: red;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: transform 0.3s ease-in-out, background-color 0.3s;
+    width: fit-content;
+}
+
+/* Button Hover Effect */
+.view-gallery-btn:hover {
+    background-color: darkred;
+    transform: scale(1.1);
+}
+
+/* Default Navigation Link */
+nav ul li a {
+    color: white;
+    text-decoration: none !important;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+    display: inline-block;
+}
+
+/* Hover Effect - Turns Text Red & Enlarges */
+nav ul li a:hover {
+    color: red; /* Highlights text in red */
+    transform: scale(1.1); /* Slightly enlarges */
+}
+
+/* If Active (Current Page) - Keep Red Box But Only Enlarge */
+nav ul li a.active {
+    background-color: red; /* Red background */
+    color: black; /* Keep text black */
+    border-radius: 5px;
+    transform: scale(1.1); /* Enlarge */
+}
+
+/* Lightbox Styling */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Dim Background */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Download Button - GREEN */
+.download-btn {
+    display: block;
+    position: absolute;
+    bottom: 20px;
+    background: green;
+    color: white;
+    padding: 15px 25px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.download-btn:hover {
+    background: darkgreen;
+}

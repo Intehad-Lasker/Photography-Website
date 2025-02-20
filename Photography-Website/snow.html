@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catch the snow, let it melt into memories. - BazzPhotography</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="format-page">
+    <header>
+        <h1>BazzPhotography</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section-container">
+            <h2>Catch the snow, let it melt into memories.</h2>
+            <div class="gallery-grid" id="gallery-container">
+                <!-- Images will be loaded dynamically here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox for Image Viewing -->
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <img id="lightbox-img" src="" alt="Expanded Image">
+        <a id="download-btn" class="download-btn" href="" target="_blank">Download</a>
+    </div>
+
+    <footer>
+        <p>© 2025 BazzPhotography</p>
+    </footer>
+
+    <!-- JavaScript for Image Loading & Lightbox -->
+    <script>
+        const imageLinks = [
+            "12xaFFG5C5QxlmVkc2wt-64dUSsZTQMAj",
+    "1Rx1YM-xsEAIfYpi2hD7h0o5IKxxd78_8",
+    "1aTpt3akSDvxL_TnqiENNvfBs8vMDej0C",
+    "1ZKgsqgiWd4Ft56QiJXuNFnBvHNb6Zxiy",
+    "1261W_NRAfFf4FY_eG4MpR-jGskNjxw3J",
+    "1S2y7jtX35418PzMp6boWMdwNJMir1BpD"
+        ];
+
+        const galleryContainer = document.getElementById("gallery-container");
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+        const downloadBtn = document.getElementById("download-btn");
+        const closeBtn = document.querySelector(".close");
+        const header = document.querySelector("header");
+
+        // Populate Gallery
+        galleryContainer.innerHTML = imageLinks.map(id => `
+            <div class="image-container">
+                <img src="https://lh3.googleusercontent.com/d/${id}=w500"
+                    data-full="https://lh3.googleusercontent.com/d/${id}=w3000"
+                    data-download="https://drive.google.com/uc?export=download&id=${id}"
+                    class="gallery-image">
+            </div>
+        `).join("");
+
+        // Show Lightbox on Click
+        document.querySelectorAll(".gallery-image").forEach(img => {
+            img.addEventListener("click", function () {
+                lightbox.style.display = "flex";
+                lightboxImg.src = this.dataset.full; // High-Quality Image
+                downloadBtn.href = this.dataset.download; // Full-Resolution Download Link
+                header.style.display = "none"; // Hide Header
+            });
+        });
+
+        // Close Lightbox & Show Header Again
+        closeBtn.addEventListener("click", () => {
+            lightbox.style.display = "none";
+            header.style.display = "flex"; // Show Header Back
+        });
+
+        lightbox.addEventListener("click", (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = "none";
+                header.style.display = "flex"; // Show Header Back
+            }
+        });
+
+        // Hide Header on Scroll
+        let lastScrollTop = 0;
+        window.addEventListener("scroll", function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                header.style.top = "-80px"; // Moves header out of view
+            } else {
+                header.style.top = "0"; // Brings header back
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+</body>
+</html>

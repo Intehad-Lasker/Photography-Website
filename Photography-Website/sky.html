@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paint the sky, make it yours. - BazzPhotography</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="format-page">
+    <header>
+        <h1>BazzPhotography</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section-container">
+            <h2>Paint the sky, make it yours.</h2>
+            <div class="gallery-grid" id="gallery-container">
+                <!-- Images will be loaded dynamically here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox for Image Viewing -->
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <img id="lightbox-img" src="" alt="Expanded Image">
+        <a id="download-btn" class="download-btn" href="" target="_blank">Download</a>
+    </div>
+
+    <footer>
+        <p>© 2025 BazzPhotography</p>
+    </footer>
+
+    <!-- JavaScript for Image Loading & Lightbox -->
+    <script>
+        const imageLinks = [
+            "1zOz184v39JZ1ideffP6Zf0aFdPWYGpTC",
+    "1MkBDTmbC55-iP4lOhFcKTu9-LB0-gGjQ",
+    "17kFWgY0vao5cedSKM-3G3MEAS3GjbDRE",
+    "1cjaTHrtkQ0xrWKNzRUwkA-1jUgheyRGE",
+    "17cYy_gJ_zLGX19T3zHfWa2o8xtjEdTNt",
+    "1aSHndg3UCkM0K8w7VZWUbu_M2m8HUFXH",
+    "1onu23oJxaojFcQQ4kFeBVzugRHMZgOaF",
+    "17rI6hNjbxKRyMR5iR-mJ5OdvOuoDM0P8",
+    "1ZYoNEWhUijGYBkx7aSdNjHfKy14rZSSh",
+    "1-RKfo9gpwdyL86y_0OC5KCOlj6idRUQf",
+    "1RH0JkD-0ERVsj_HSw_upUyQDJaKFX8d6",
+    "18bK8Nt1RExh4NmzCJl7xA5mglbKNJdJb",
+    "1KhGuc6vztEl8tiP4YChZd-EAny8DuKLb",
+    "1iLahMHtdRNreSuhX3qXmRiUVv_Z8hRPl",
+    "1thlTYDV7Sfuhzn_iNVzfu6Ew4X0XyOC_",
+    "1Hs6EZrctvoKZ-rhtVbmjt_DnqRt2k2Ar",
+    "1nlBQBVtJ_ILqbCi5nHM-F7xS2b9gJiRP",
+    "1GHQF6pdMglH04-_HyHGQ3pxL4e_9evxQ",
+    "131djgfbniRSdxAz5nOS105d0ZF9fMBYr",
+    "1XSCQWw07hFv_JVNhu3ut5ZIlGAqKCFlY",
+    "1PD3DepFcBq1PukgTS3_vT8YbIjwroROB",
+    "1O2rQi41Ii3Hc29-vYKHRtEydy-ZjPkTv",
+    "1nMv9kvx9PaMD0RiUXCm9wT-lZ5iJmpwV",
+    "1usDZRCOTOfOclQFrFwFUvpL7U_dDA_7R",
+    "13NmTvwWPds2KBGnSwH8A_dj9eg8Kb0O_",
+    "1BXn6mQgGkrJZigWJ9bNuOLQ4aff_gvFf",
+    "1zvTsWwBGzUZHlt9WHYe3rDnvj6lEAwH3",
+    "1JmwRYz7xrWfR4iIhB0-unDZrECw7antc",
+    "1_bzA6Zidvvg5CaXJHl-ds2N0xZ-aWh9c",
+    "1ljEODTQ-XPVlJ5qvBxeENLQA_UbOZ5AJ",
+    "12TrxaXBiwpr0p5EWd-q28Tkz8XY8lJ2k",
+    "1yF6VVx4fqDOtUfpcUTqD_l8sMg6BK8CK",
+    "1fTBzA0Rk6l9T0Qfx4ss8hrJj910_0rNM",
+    "1upaj5vElmtQ5hiEUMzzzdzZ-9Efi9rrw",
+    "12LE9c6VauEoUACofYJd6QYjuZhVWFPsq",
+    "1NVdOB-tfAZKZX3l_CW-OW7T1oUvdEmkW",
+    "15giUGePfKg60ng1OWs4oyYwTfZGiOND1",
+    "1CQVfAq7aDw-121hIT5nbRz-vzwuL0GLa",
+    "1EU11KrCRuI586x1fZ2JLq-uGyTi0Zzna",
+    "1aV6bOD3ofGr-KZn0PQuldBrngO5R-sQI",
+    "1mRQ4uhbgELL4h53zQUP3h7pFXtV5oYUp",
+    "1M9yvmKJaSpZ91yyft_cupoNThN5tpqsp",
+    "17biC8z_p70VRc4Q2268FHjhq00T6O50S",
+    "1vycH7yl2ModpnTKyiMdlYfySAHUZVnRD",
+    "126jNAxUDyqJNJWsxaOoLtOZ9ru35fNq3",
+    "1fTYcmqKwnAZ1yHmT4_AEjTjnRZ_Bu0Xq",
+    "1AQYfNe6zYYxfnNKuTuncktFd6iCZB-ZT",
+    "1M3wep7Jjo-V5msKDAex1ikqhkI2UBtJd",
+    "1NXZ9AzXqSLjhlrG2_cV8xVGp-b6ouQXg",
+    "1wwDMUI8DZ73vAWAOSbHymaIGZEMfKEG9",
+    "1Jm65Lw7VjlcHdxmjqFCLDhWZThruX7F9",
+    "16b_AJTet_SbBAnlwLQk8KpyrPu10-emC",
+    "1Oh0IYsgnhBp0vfa6-RPjYqEl2k7Pzazl",
+    "1FqngB9TdzihODQQeAWLZDRNhQCtMZYiL",
+    "1L36I3eucJ45cK17woxwEd0WT0mxKom0S",
+    "1eKgN-JH6PlFge3J3tRtecM8hOnICnfaG",
+    "1jHvPxtg17l9i2PP-sBr7eD_2zOvqNt60",
+    "13oXUxAFFEm52RHBWzQxmLolCaWu7XP88"
+        ];
+
+        const galleryContainer = document.getElementById("gallery-container");
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+        const downloadBtn = document.getElementById("download-btn");
+        const closeBtn = document.querySelector(".close");
+        const header = document.querySelector("header");
+
+        // Populate Gallery
+        galleryContainer.innerHTML = imageLinks.map(id => `
+            <div class="image-container">
+                <img src="https://lh3.googleusercontent.com/d/${id}=w500"
+                    data-full="https://lh3.googleusercontent.com/d/${id}=w3000"
+                    data-download="https://drive.google.com/uc?export=download&id=${id}"
+                    class="gallery-image">
+            </div>
+        `).join("");
+
+        // Show Lightbox on Click
+        document.querySelectorAll(".gallery-image").forEach(img => {
+            img.addEventListener("click", function () {
+                lightbox.style.display = "flex";
+                lightboxImg.src = this.dataset.full; // High-Quality Image
+                downloadBtn.href = this.dataset.download; // Full-Resolution Download Link
+                header.style.display = "none"; // Hide Header
+            });
+        });
+
+        // Close Lightbox & Show Header Again
+        closeBtn.addEventListener("click", () => {
+            lightbox.style.display = "none";
+            header.style.display = "flex"; // Show Header Back
+        });
+
+        lightbox.addEventListener("click", (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = "none";
+                header.style.display = "flex"; // Show Header Back
+            }
+        });
+
+        // Hide Header on Scroll
+        let lastScrollTop = 0;
+        window.addEventListener("scroll", function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                header.style.top = "-80px"; // Moves header out of view
+            } else {
+                header.style.top = "0"; // Brings header back
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feel the waves, make them your escape. - BazzPhotography</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="format-page">
+    <header>
+        <h1>BazzPhotography</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section-container">
+            <h2>Feel the waves, make them your escape.</h2>
+            <div class="gallery-grid" id="gallery-container">
+                <!-- Images will be loaded dynamically here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox for Image Viewing -->
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <img id="lightbox-img" src="" alt="Expanded Image">
+        <a id="download-btn" class="download-btn" href="" target="_blank">Download</a>
+    </div>
+
+    <footer>
+        <p>© 2025 BazzPhotography</p>
+    </footer>
+
+    <!-- JavaScript for Image Loading & Lightbox -->
+    <script>
+        const imageLinks = [
+            "1GSyvQVeighO-T40HVBx2nqnlFNxAvasA",
+    "1uu7rUmdBsFR6FDw4_SrvKFXQ6ZbUKmH3",
+    "10CN-W42Kn93ynDQ7mD5Id-m7XealGWWw",
+    "1ejxuKSpBU9ejrceny0plluKqipOcJvo0",
+    "1LT8_eHG-YBa44YSwW9BWzF-v_Bm1i1V3",
+    "194aX-ASq4YkuWjvoPzrHUbGUqaGMbD0b",
+    "1nia1denLuEK-FED8gp_0gEpdxqgCeglk",
+    "1Qs73g9UTUcx3Sj4kbPCI8l_VgYet2vS5",
+    "1rx5YG5VmgGokm9InnYGm0SQI-J987P6U",
+    "1ur3hFGkwsc6C4UqgIPOPolmD_pJ8n3T3",
+    "1naW9aJnRe4JVFmLtCVnjjIcZLx0B19pu",
+    "1xHCvbvbpPePyHgvjuFHgzzjgq6v8Vyz6",
+    "1slwo896R6qUSOeNzMRqs8lcGxeYtfzjY",
+    "1_r4l1VJL6Ac4XqhzCZh4uYJlLg4zMKrV",
+    "14WYe5pYnwCiCbJbC-th0h97jH7DdJ44s",
+    "1Ccdj5K8xzbXHWzHrulFv1PNHJ_erLZsr",
+    "138myLDqccaFqppyFYIMgEPkLO7YXUgPG",
+    "18vrztG3xYIr11q_OnJJahPPpHNqpk_ki",
+    "1oV_z9ogoZBzWJB4VEKTHKDrFKEJSOA53",
+    "1jqYOOHBZscehbUEBpNgVT-nrc09pxDb4",
+    "1L7-7wkUv6oQ5TTrzmBGGXF_ElCH0SlGG",
+    "1L3Vv7N-RHmKKtRD42eFHh3pRfSCcWnKX",
+    "1Snwzh78wb9L0HmoEVuJbQ-Klz5q3CLo1",
+    "1n_syg7t59TtF6R8wQOyrf4tpMc1RBSoO",
+    "1LpHU_dnuzVZiV7ViEWtkVwJNj8-5FflT",
+    "1RMSeCLeklAravN2zM9DMhpl3VLtPL496",
+    "1s2ynMHnkMv7BOEJgR0rFEh97J_IRRMa2",
+    "1tC_urs7GPWf-g-TUdxz98bWr9qqCkUDv",
+    "1JoUzflPt9dC2O1bNN1dvqgbMEc6zVge2",
+    "1XIUSu_R6dsl7aRzV5Yhl4uWaJLHmmLeT",
+    "1FAUT2IgKPwsft1AzywZbwUCXuQGz4Tlw",
+    "1JbiK3xfNm1KCEhMogYPERPnzek6dfD2s",
+    "1YCD2Qeqgbb54a0f7ZSIwa1eDPGyGV4-H"
+        ];
+
+        const galleryContainer = document.getElementById("gallery-container");
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+        const downloadBtn = document.getElementById("download-btn");
+        const closeBtn = document.querySelector(".close");
+        const header = document.querySelector("header");
+
+        // Populate Gallery
+        galleryContainer.innerHTML = imageLinks.map(id => `
+            <div class="image-container">
+                <img src="https://lh3.googleusercontent.com/d/${id}=w500"
+                    data-full="https://lh3.googleusercontent.com/d/${id}=w3000"
+                    data-download="https://drive.google.com/uc?export=download&id=${id}"
+                    class="gallery-image">
+            </div>
+        `).join("");
+
+        // Show Lightbox on Click
+        document.querySelectorAll(".gallery-image").forEach(img => {
+            img.addEventListener("click", function () {
+                lightbox.style.display = "flex";
+                lightboxImg.src = this.dataset.full; // High-Quality Image
+                downloadBtn.href = this.dataset.download; // Full-Resolution Download Link
+                header.style.display = "none"; // Hide Header
+            });
+        });
+
+        // Close Lightbox & Show Header Again
+        closeBtn.addEventListener("click", () => {
+            lightbox.style.display = "none";
+            header.style.display = "flex"; // Show Header Back
+        });
+
+        lightbox.addEventListener("click", (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = "none";
+                header.style.display = "flex"; // Show Header Back
+            }
+        });
+
+        // Hide Header on Scroll
+        let lastScrollTop = 0;
+        window.addEventListener("scroll", function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                header.style.top = "-80px"; // Moves header out of view
+            } else {
+                header.style.top = "0"; // Brings header back
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+</body>
+</html>

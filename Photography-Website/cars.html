@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life’s too short to drive slow, pedal to the metal, no looking back. - BazzPhotography</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="format-page">
+    <header>
+        <h1>BazzPhotography</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section-container">
+            <h2>Life’s too short to drive slow, pedal to the metal, no looking back.</h2>
+            <div class="gallery-grid" id="gallery-container">
+                <!-- Images will be loaded dynamically here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox for Image Viewing -->
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <img id="lightbox-img" src="" alt="Expanded Image">
+        <a id="download-btn" class="download-btn" href="" target="_blank">Download</a>
+    </div>
+
+    <footer>
+        <p>© 2025 BazzPhotography</p>
+    </footer>
+
+    <!-- JavaScript for Image Loading & Lightbox -->
+    <script>
+        const imageLinks = [
+            "1TMvkQbkgZrcDL-5HTxjQrfMGzPSsP82d",
+    "1l9cgA5lbwY0spTmCBkVSw2sWxMbdt-4X",
+    "1zesKyizh0L8EKXnyFZKH5ZOMRc7wLrsK",
+    "1KjOr_n6U5NA0_s_AlYgQmadq7s1ctE8p",
+    "1YOagVLd3YaZDdiCMakA8iSgN7Fzhd9O6",
+    "1kAN5EVa50cMwZSgGL3VoNPgTOajisMgY",
+    "1GZoEW3auiE4Hc91NGMRpPmBQ4HxVVZLn",
+    "1hboeSGye6BFA0WGkX1a_AF0oQ1ZofVXf",
+    "1wU5f_iBaY3s6xBdxEljWYJY0A3MEWUyE",
+    "1ycMc2lEvlA_e9iuwsNph4Yw3l-iMRZ_U",
+    "1AEBzZI9XDdvPcFjjtLOsu5n5shYY7Ha7",
+    "1OC_Fsno25eEsSfwsQl9NMn0l-jn8ZDdh"
+        ];
+
+        const galleryContainer = document.getElementById("gallery-container");
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+        const downloadBtn = document.getElementById("download-btn");
+        const closeBtn = document.querySelector(".close");
+        const header = document.querySelector("header");
+
+        // Populate Gallery
+        galleryContainer.innerHTML = imageLinks.map(id => `
+            <div class="image-container">
+                <img src="https://lh3.googleusercontent.com/d/${id}=w500"
+                    data-full="https://lh3.googleusercontent.com/d/${id}=w3000"
+                    data-download="https://drive.google.com/uc?export=download&id=${id}"
+                    class="gallery-image">
+            </div>
+        `).join("");
+
+        // Show Lightbox on Click
+        document.querySelectorAll(".gallery-image").forEach(img => {
+            img.addEventListener("click", function () {
+                lightbox.style.display = "flex";
+                lightboxImg.src = this.dataset.full; // High-Quality Image
+                downloadBtn.href = this.dataset.download; // Full-Resolution Download Link
+                header.style.display = "none"; // Hide Header
+            });
+        });
+
+        // Close Lightbox & Show Header Again
+        closeBtn.addEventListener("click", () => {
+            lightbox.style.display = "none";
+            header.style.display = "flex"; // Show Header Back
+        });
+
+        lightbox.addEventListener("click", (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = "none";
+                header.style.display = "flex"; // Show Header Back
+            }
+        });
+
+        // Hide Header on Scroll
+        let lastScrollTop = 0;
+        window.addEventListener("scroll", function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                header.style.top = "-80px"; // Moves header out of view
+            } else {
+                header.style.top = "0"; // Brings header back
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+</body>
+</html>

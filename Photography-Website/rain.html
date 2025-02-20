@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dance in the rain, make it your rhythm. - BazzPhotography</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="format-page">
+    <header>
+        <h1>BazzPhotography</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section-container">
+            <h2>Dance in the rain, make it your rhythm.</h2>
+            <div class="gallery-grid" id="gallery-container">
+                <!-- Images will be loaded dynamically here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox for Image Viewing -->
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <img id="lightbox-img" src="" alt="Expanded Image">
+        <a id="download-btn" class="download-btn" href="" target="_blank">Download</a>
+    </div>
+
+    <footer>
+        <p>© 2025 BazzPhotography</p>
+    </footer>
+
+    <!-- JavaScript for Image Loading & Lightbox -->
+    <script>
+        const imageLinks = [
+            "1wU_o9MSQGOj2VJmIapitUL5xOOvsm3a4",
+    "1AXVDHt-A0UYNllaRTUpEpv5hH7eTKxha",
+    "1wPdT6FJc5XeCU-QvS7bwt_DedGDSQ44g",
+    "1yqLpd7D5rnh0jw3XNHVlV3KNJVof7jSO",
+    "15vF4b85Z2NT3Z-3fjcVtlQD7ijjW-gdZ",
+    "1EtuIW7yBNPQ3V_8K9l4nVklaF2Hy-jIo",
+    "1SSomOzQVxaQz_VqHutxvaxKnjpUCO_Cv",
+    "1BmHgmR810OaR4IdCXp9-4U-YIeJohh99",
+    "1I9_iXY3ByMMQ32iDA3RuriyN82gEacE4",
+    "171jgzgukEJ9LBbiDeDJy9XOzV_ICIHBd",
+    "18dITpDj8KQbiEeHXYbDccG82ha0d62xy",
+    "1V-ifHfX3NgU_4J7PjQxGVG7ZaUDP1TlZ",
+    "1BpkwifreQ1_azR6dJ7DrfwqPY_fD1Ymt",
+    "19EQZm5U5DZEjB0Php2U_lQWmkDXjLpZp",
+    "1n6_lBjzD8UjQ2n4iHGRrI3bH7aW-5TCb",
+    "1ziXgenc1wBlPsVUNr6ta2munU94AQHHE",
+    "1imKua0-WYo0MCoNnNZLX6zqTd1078S1C",
+    "1qyNzd9mkREJnDTFmDrLa-kP9Ti17CfZi",
+    "1-Aqvst67TT8HkSDpkR5UTGFlCedfV-NT",
+    "11ow24LDUS7kFQsaVVoqQR7SUEF-o9riu",
+    "1dPKJreDeK4MmASRUS3munEdyrZMNComy",
+    "1gA5kW4oG_kPxB6tQq8_hvqB1VsBOUv4H",
+    "1Aqk6MDDYKuCiAcnup8j001ujMd3HOH-z",
+    "1PvYOsxwI1t8cSQvSyDMLgLQG2l4HkKjH",
+    "1Kqly4A-EN7n8ixyBjccaKcPbpSBgohXu",
+    "1FLoz7ueyC7HBO4Yug2VC_bOWVnDShOGk",
+    "1lbbvwWpNlT9SLRJ5XsovEtRaHI1CJ1Lr",
+    "1goTlVxCNXGYbe4rsmfFzoLHE5wNIk-oU",
+    "1alt3EuF-qFexJ7QhMdFd-wSmo9xESSZ0",
+    "1CSTs_3o3BhVyJ6wjKxe1uqA4fqY0zh9g",
+    "1uGK66Jwe7Xv4uvMz8PwF4dbHS8QJEyw2",
+    "1wZq1iNPllTrWHROZq64AwYsUtY3eSrbh",
+    "1gcGRnHtQqSsd6jmNjEXvQ3tQHGiGl3_y"
+        ];
+
+        const galleryContainer = document.getElementById("gallery-container");
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+        const downloadBtn = document.getElementById("download-btn");
+        const closeBtn = document.querySelector(".close");
+        const header = document.querySelector("header");
+
+        // Populate Gallery
+        galleryContainer.innerHTML = imageLinks.map(id => `
+            <div class="image-container">
+                <img src="https://lh3.googleusercontent.com/d/${id}=w500"
+                    data-full="https://lh3.googleusercontent.com/d/${id}=w3000"
+                    data-download="https://drive.google.com/uc?export=download&id=${id}"
+                    class="gallery-image">
+            </div>
+        `).join("");
+
+        // Show Lightbox on Click
+        document.querySelectorAll(".gallery-image").forEach(img => {
+            img.addEventListener("click", function () {
+                lightbox.style.display = "flex";
+                lightboxImg.src = this.dataset.full; // High-Quality Image
+                downloadBtn.href = this.dataset.download; // Full-Resolution Download Link
+                header.style.display = "none"; // Hide Header
+            });
+        });
+
+        // Close Lightbox & Show Header Again
+        closeBtn.addEventListener("click", () => {
+            lightbox.style.display = "none";
+            header.style.display = "flex"; // Show Header Back
+        });
+
+        lightbox.addEventListener("click", (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = "none";
+                header.style.display = "flex"; // Show Header Back
+            }
+        });
+
+        // Hide Header on Scroll
+        let lastScrollTop = 0;
+        window.addEventListener("scroll", function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                header.style.top = "-80px"; // Moves header out of view
+            } else {
+                header.style.top = "0"; // Brings header back
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+</body>
+</html>

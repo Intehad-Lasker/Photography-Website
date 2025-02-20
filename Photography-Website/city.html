@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lights, life, and endless stories—own the city. - BazzPhotography</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="format-page">
+    <header>
+        <h1>BazzPhotography</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section-container">Lights, life, and endless stories—own the city.
+            <h2></h2>
+            <div class="gallery-grid" id="gallery-container">
+                <!-- Images will be loaded dynamically here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox for Image Viewing -->
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <img id="lightbox-img" src="" alt="Expanded Image">
+        <a id="download-btn" class="download-btn" href="" target="_blank">Download</a>
+    </div>
+
+    <footer>
+        <p>© 2025 BazzPhotography</p>
+    </footer>
+
+    <!-- JavaScript for Image Loading & Lightbox -->
+    <script>
+        const imageLinks = [
+            "13xpuMyLlwB9IHW26qy4ydOJY6Q8NWjLU",
+    "1PquLFntRW-McCpIUGYW67yion_76XM33",
+    "1ua9WWWyRbXfSH9CelnvPur18HL1TzXgv",
+    "1_f20C4EyUhl40IiU3Uwm-r2NzFBYJAB0",
+    "1EziUeMF--SE41KPonc7fTf1YFczLdAre",
+    "1Igw7z44J7stzjB0Fr3gD7kTi9p6-H6jw",
+    "1YBfJ_VqBMDdGDO3tvO-7btyYP5MpVpgx",
+    "1f2XHri57pxXM-iZYbCToTYVquF4XkuAw",
+    "1rlJTh1MFfS3Jx7znA0vmcdAlpHN4HQv4",
+    "1YnN8EP1C2_akqFs6KuXvHjZKtKBTE7ek",
+    "1iiln5HkRWO6vQC9tCAqDp0D3vugD4K7k",
+    "1uo74h9S6wVilaR7xCq_7-ux_RQtv4xpV",
+    "1gY95072eJHQ8RFkklam8x7hQBVJU7VnC",
+    "1wsszq_uFLnCx1j8o4bh3v9JHX68c5iZ2",
+    "138JO5TA4HiSEkcrXsOf7WY42Rmc13M92",
+    "1gkQfKsneKV1h25Ml2PdfiVUIzqzn2M7w",
+    "1w4GRIt6I3aPbJUZQSTE5a1kbT2MVZcEo",
+    "1y7GsGUGtDYju964TcJtsyl90UIwaQ-nf",
+    "13ViHrzTSSjqEhk1YsdBxsOHVt39Rq6wO",
+    "1KvayhpVItJboSGvkZQf1b9zD8iTO9v3d",
+    "122XJ4PPWRcSkCOzxQkXLf3HDQM9vAnlo",
+    "1OwqToxJ7goQbl0LjryTwHmnte36sHBnl",
+    "1KW4pNOOSggh4MafmffVbEU38MurWD5oX",
+    "18momBIh7t8jFxHqzMB5CJRr5ubnUtDIJ",
+    "19Dh3jc91tsh5zmA7wBPTxFLHQC0PzwTb",
+    "1ud0NO1-Wn2P2p0-F__AEutXpdlU8vXOT",
+    "1_PRWujzNJKsOD60KLay_KvRCE7trRVL8",
+    "1yAeMcqHckffSUkGDKagdyUjVh_wq93Ay",
+    "17-x4YAmXlGXVvGvJG2tWsnhn0GAPCUSD",
+    "1TGPLbQQNGJbcHvU_qH1BhAHtsQisyBY7",
+    "1AcBh-dSpTcUhJYN88K1fisjaDVOTxieB",
+    "12_tOWpeVJIR6JBLc6XRp3vvSr5ct3tq0",
+    "103H33ohyGghLcrSWmx2b-9QFrXgC56TN"
+        ];
+
+        const galleryContainer = document.getElementById("gallery-container");
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+        const downloadBtn = document.getElementById("download-btn");
+        const closeBtn = document.querySelector(".close");
+        const header = document.querySelector("header");
+
+        // Populate Gallery
+        galleryContainer.innerHTML = imageLinks.map(id => `
+            <div class="image-container">
+                <img src="https://lh3.googleusercontent.com/d/${id}=w500"
+                    data-full="https://lh3.googleusercontent.com/d/${id}=w3000"
+                    data-download="https://drive.google.com/uc?export=download&id=${id}"
+                    class="gallery-image">
+            </div>
+        `).join("");
+
+        // Show Lightbox on Click
+        document.querySelectorAll(".gallery-image").forEach(img => {
+            img.addEventListener("click", function () {
+                lightbox.style.display = "flex";
+                lightboxImg.src = this.dataset.full; // High-Quality Image
+                downloadBtn.href = this.dataset.download; // Full-Resolution Download Link
+                header.style.display = "none"; // Hide Header
+            });
+        });
+
+        // Close Lightbox & Show Header Again
+        closeBtn.addEventListener("click", () => {
+            lightbox.style.display = "none";
+            header.style.display = "flex"; // Show Header Back
+        });
+
+        lightbox.addEventListener("click", (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = "none";
+                header.style.display = "flex"; // Show Header Back
+            }
+        });
+
+        // Hide Header on Scroll
+        let lastScrollTop = 0;
+        window.addEventListener("scroll", function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                header.style.top = "-80px"; // Moves header out of view
+            } else {
+                header.style.top = "0"; // Brings header back
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+</body>
+</html>

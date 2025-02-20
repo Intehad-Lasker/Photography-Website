@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chase the sun, let it color your world. - BazzPhotography</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="format-page">
+    <header>
+        <h1>BazzPhotography</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section-container">
+            <h2>Chase the sun, let it color your world.</h2>
+            <div class="gallery-grid" id="gallery-container">
+                <!-- Images will be loaded dynamically here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox for Image Viewing -->
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <img id="lightbox-img" src="" alt="Expanded Image">
+        <a id="download-btn" class="download-btn" href="" target="_blank">Download</a>
+    </div>
+
+    <footer>
+        <p>© 2025 BazzPhotography</p>
+    </footer>
+
+    <!-- JavaScript for Image Loading & Lightbox -->
+    <script>
+        const imageLinks = [
+           "1DBKTnTd5o2JxZoboFo4XEfbaBS3vHSe8",
+    "1TlTn0f37g1iXHqiEkrH722NYFPz6vvn0",
+    "1KKICWlr-9X4mruaiy1QmEqwo257D1J0v",
+    "1nBmuJpPk_yZMOF1gIL-TyArdiOddtjPR",
+    "1kxKYnN00XFNZ-iAnzdH13Pfmpr8NmW1V",
+    "1kt6ctmAgtWI9oz3ZOjInty6ZG3ieoqj0",
+    "1UcQa5cI7DC7JKQlHkt42ODsW5ELIpyg7",
+    "1SDwVaYBECT64H8baOpSZ680fgnAsniG5",
+    "1NvSDxVqDhkNBMWUchMKuUXPCJYcKckv9",
+    "1_3jOr8kJ0UAmXPPNaxGN-CeU8vOOkSRe",
+    "1eq80SybWrrSJItIz5mLK0tXyj2BvAKWQ",
+    "1KQa69Z-odQ6YY-3GAbb0DZyknf1anerg",
+    "1hmCxSxWhsZZfK4dnZw9sARgpLScu7OF3",
+    "1m2mkF-wkC8tqDfK1oK0J9AxoEtnufpRW",
+    "1uRxwQlQgPcLMXISwie4nWpecA7npLd0f",
+    "1FwKCMuDrbJtWDuY5GLmzaMIto5oH4e-q",
+    "1NEjcbN5SQ9M9h9HHwC1IVWNp27g447dB",
+    "1Y5yJImQmPHWt5W-k5N5_CyijF9cx6cFO",
+    "1rC1XHk4k2yVeZqvWvw4QkJ_g4iGzmO1h",
+    "1DO1gifEYn48TN4YzO36ZB_PcyPAePIPG",
+    "1Sv2F9pFFZYLTIfKkhkBpNz4Za59fEzAE",
+    "1I271MyjS0HO7RvMPKILbYGSocU2H2TPq",
+    "1bQgfinHYjnlb-qdWgPhu6sQPuSCDDcy8",
+    "1kZabA13oFsU5tjMdc4xjzg31qMeIayDq",
+    "1a_qWt5W6RlUCJUF9UOFFRIF_8bxuJ3cE",
+    "1i6SJXAlrOahFnsKPqPcXr5-3ONQF6oMh",
+    "1_S2jMJLaH8dB2kWc0NbqT3Cs2wm-Qi-N",
+    "1_txyZO2T6lh_3RS9pZ4zDNGLydtfr_P4",
+    "1jIxPMcUksEJlVLm39DkcvKHwaHjFcCPw"
+        ];
+
+        const galleryContainer = document.getElementById("gallery-container");
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+        const downloadBtn = document.getElementById("download-btn");
+        const closeBtn = document.querySelector(".close");
+        const header = document.querySelector("header");
+
+        // Populate Gallery
+        galleryContainer.innerHTML = imageLinks.map(id => `
+            <div class="image-container">
+                <img src="https://lh3.googleusercontent.com/d/${id}=w500"
+                    data-full="https://lh3.googleusercontent.com/d/${id}=w3000"
+                    data-download="https://drive.google.com/uc?export=download&id=${id}"
+                    class="gallery-image">
+            </div>
+        `).join("");
+
+        // Show Lightbox on Click
+        document.querySelectorAll(".gallery-image").forEach(img => {
+            img.addEventListener("click", function () {
+                lightbox.style.display = "flex";
+                lightboxImg.src = this.dataset.full; // High-Quality Image
+                downloadBtn.href = this.dataset.download; // Full-Resolution Download Link
+                header.style.display = "none"; // Hide Header
+            });
+        });
+
+        // Close Lightbox & Show Header Again
+        closeBtn.addEventListener("click", () => {
+            lightbox.style.display = "none";
+            header.style.display = "flex"; // Show Header Back
+        });
+
+        lightbox.addEventListener("click", (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = "none";
+                header.style.display = "flex"; // Show Header Back
+            }
+        });
+
+        // Hide Header on Scroll
+        let lastScrollTop = 0;
+        window.addEventListener("scroll", function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                header.style.top = "-80px"; // Moves header out of view
+            } else {
+                header.style.top = "0"; // Brings header back
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+</body>
+</html>

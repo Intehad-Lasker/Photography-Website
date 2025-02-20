@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breathe in the wild, let it set you free. - BazzPhotography</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="format-page">
+    <header>
+        <h1>BazzPhotography</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section-container">
+            <h2>Breathe in the wild, let it set you free.</h2>
+            <div class="gallery-grid" id="gallery-container">
+                <!-- Images will be loaded dynamically here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox for Image Viewing -->
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <img id="lightbox-img" src="" alt="Expanded Image">
+        <a id="download-btn" class="download-btn" href="" target="_blank">Download</a>
+    </div>
+
+    <footer>
+        <p>© 2025 BazzPhotography</p>
+    </footer>
+
+    <!-- JavaScript for Image Loading & Lightbox -->
+    <script>
+        const imageLinks = [
+            "1CaBUcI04knSMHSvxQxZPInUlEjN4FemB",
+    "1j1314g9nmx9gez8VtzmaTlcli9JY1CJw",
+    "1dymWa66W2TWqLFxSB_wXi4-T2PK3gUP-",
+    "1zxIUOqVzao9tDh-jGUG6bHIQY9PEB5-Z",
+    "1It20bRmkcPbLNpD-k_CWRMFJcjdw5jht",
+    "13qbjlbnGqMNJ42Pr3Pv7kjB2otSW0kWt",
+    "1ul1T5dg3tc5xodYTA4lUWhi9naqapMKw",
+    "1rvJMMecSWU1JS_zXaixjqLVVbr1rl5Vf",
+    "1wgpOEuaBczyH38oqqpdXWcvSAa5eazJu",
+    "17I3l-5I43Qvn9S0x0o4B7Au6_b31tFdE",
+    "1pjBmH1X8QkgN_g6v-pnIAfNdMRtpRwGI",
+    "1Ywgtk-ColEqQxIl_44dXW5uNJYdUERqL",
+    "1gsJzo82VTXXPB0N6pauC75beV2HopBhb",
+    "1jrXdxFEccddsCtrSQ6XSO4IbPRvMYHIG",
+    "17PhL7rmI29VDnoZrtzkxE_TS0bd5b5P4",
+    "19QkL00Mk8WWayWH9gyaAwe0FvmrLqqd3",
+    "1Yf8qO2HeMRt3_nNn0wgEz2-SWJsm5uyn",
+    "1pw0qevK2szgK60VkvDT9ICbSfNlLEMhv",
+    "1Xzwc76NSzgGsSSj9wA_4d0CP2RJoZJqI",
+    "1ZQZm0RUrrWd5Nxz-CYMPNpaYeYjiqBV6",
+    "1LK3CweXDl3qUDeAAKCpsELauDLiijCR_",
+    "11XLxl4bktp0x2YghxaP7hyw4WOhc3jpS",
+    "1Ywo0Zy8WJGt43xupdDlm5PoZowaAM-qY",
+    "1s1RxjIntQR-4ubwl0nhRgKsE96vAGEGz",
+    "1TBk72xYA8KFYFCOHO4AnoDDDnf-QCFB0",
+    "1IuKR8j5I9q4czLz-J5fxeaMe0erthzat",
+    "1dWkvjMTnrdweIKPEIKZ6kB_Cv_r3wqwP",
+    "1_Yn_Ei6tIAwEcJtsR6urn6DYl6KROaTi",
+    "1ZofOfOr1N4mpFgwuTdMZgCO7nfuyrhbh",
+    "1GlCqnUoIr12Bg1VTQDlZ6IVrL34P6Awr",
+    "1-yTGTmaLZ1s_2_z5lWGdxj4PwovX6uAA",
+    "1OWjMhgI91Ni_0cccM5WX9VIVanrCQO6M",
+    "1sdAZjp9atnSjX3DET_jXWmL-HNf1UcMg",
+    "1STXZz8n0NIqUdO3tBluhMVS0mUfvPFil",
+    "1mDV0kiW5mF9CnLIhXvniLrJ2VtvBR9WW",
+    "18yQR2CVUydAkokH4dBlEFCeRD9C-F1r7",
+    "1wzqgES_CtmuMsnM1T8YzDBPRZ4uIH7Rg",
+    "166ElT-e3g2XJiWbwOGJZRdhOTL786jZ2",
+    "125O0MqOm7mExBCb5MG0zyVXiDTs3WLUO",
+    "1QsrgyV6RBPCLGaQjO1jOTMX0zyD2LFJf",
+    "1rr6Xi3NbbM0BycliEeUEDtV8HCDBZmat",
+    "1TTA0Jo8TsFudje7b-sO9jBjzvpIwbjbt",
+    "1W-z8O2SV9BHcFSbWfALt9IA4qcaqKjH3",
+    "1lZlGcqBIaRH_qfiuI_5fsIgy_UsgnFzE",
+    "1-n8XU62MfY_oWBmREZDW2S_cxiMNjgx1",
+    "1z2pl1sVSMnjhEhpp7C5AcXeJLkQRgGYb",
+    "168-dUhq9ZyKdKhb0fgZKyElK7bwDU5Uq",
+    "1J9gKRKIKI2s72N2F88Yan8TMp-S5mzWb",
+    "1G8o0OieW-ZRDr96ml9ajBRS4unNlH_GM",
+    "1F3CFW_XvJQ89YSNX2EUJFc9AVZWGO2wL",
+    "1ybqmBwKFhIYaxuXQoo07aChvtF7XEhZc",
+    "14phdCZIooLLXgBbLYIIjew2VIh8-oWjp",
+    "1WQ4ZJKD52K_yMLjBWbhZXaPNN1NytDlV",
+    "1CMG29ek7aEjO6mdDpCtmgWRBpQf8mX4w",
+    "1evIr8g7f7_1EGu60QJRYyoluLE8qW7uq",
+    "1070pLfRonNg61BXMYjOVRyQejFzsEUvG",
+    "1g-mdOebS5ArVTNX8dAQyo1jV-sflG3fW",
+    "1JD7KmaH5I7qCVdswxlXoQ1H7qZwVsvhT",
+    "1CIOL910H9uEsl4zWZnJVcrCYwKx6Hsiv",
+    "1GPdJCoBJcHoBSmZob_1EuvvRlNM-5u7e",
+    "16zdhL7seyN8-T8M-4sWBIp0qRDp06U3S",
+    "1oJTtej8jrNY4W_0LLsuM3lq3hsTBG41N",
+    "1fe2OJ-fTNakOz_YZP3OKBVL5vh4lb-lQ",
+    "19kdMsepAI2-hcMllWugU_QKUtrtXIfzK",
+    "1-Bf7GdxP-ibkYGUySqhYA8cpIXlfT7dD",
+    "1ETO-iXaVBnfNlntY69MnsTT6fhDuQpxv",
+    "1pPd1vyQHJiEuO4CgS4bZdJ6lfk2S4yrO",
+    "1g8k3BsXeiUGVzJ2GyvT1uYgXi-H3u8U-",
+    "1PxtgxG4MOG-1XbUT_XWCc2ZKcTF11OnG",
+    "1KfjP98YF4pit1EAEMh7k4UBuFT-1K3tP",
+    "1l5mGGnVnQ4ZAQOEil_ZGMF-vZ8SBB3GD",
+    "1EnTNz9B6ylkEEw-cV31iGFRBhrOQsS8R",
+    "1bt6UrO7YUpZW9yQCHfzLmCj-PJQ1j9_G",
+    "1UmhEShAKTT2W51lifOO80DXhklcpEBBq",
+    "1bt4uYyQ3RwP3J8s5hVx0N-EAZBqE9EMX",
+    "1MQmq4hGB5aB7vYp2IZx17GGd1-AurIDw",
+    "1IPLQHlPwnZLXEc8iUkpnZt0Q8STAn-In",
+    "1_SUBzwHiyWeQlZat7FCpNouiwUU9r-U2",
+    "1eC-Wc-8974EU6Y7zfQcIaR9z896iw12T",
+    "1bj4Xrh96D207Y7r-n6D0gSRM0cFQKY5N",
+    "13NafhRT5Z2HdwIX3IGFu_nyb9LtUVDQC",
+    "1jtpUp8ytgSWersYUxxnoFHUVNStFU5gt",
+    "1xTpp21uBRmVuhdAzd_T4dcV21fG33Ybb",
+    "1qfSalATJAU5zSC226Y_8MdGLs3dT4EvM",
+    "1ANyAF6tBHcV9K4K9GLDxnBYZ6KLLyPnR",
+    "1gVmaDxUiFxnH0jqWIRFv0WDAHf6DtFSa",
+    "1AmBPAY2_u-zn4FDZTflMHoNQHhcXY9-I",
+    "1T-cH_mjtlqjdUZXp8RwxyaRziI7t19Xt",
+    "182x97vWNlVTei8rp_2As88XyO_MhYm87",
+    "1QAGygDdj1z3gA5vwnvZmoxl2ibxT6VII",
+    "1sGksOyZJHcUfUrnlmvsfnGBIX7zu65S5",
+    "1bw2mDJjZTxfxYBBQ1ep2U1DYxYGkHelT",
+    "1rs4i32Yt6dctwOlfiq2rTHENmHLA36S0",
+    "1UZzSxiMcLBgZp0azB4Ib9nAVcXOaLbmW",
+    "1YMuUpYGO13ME13xOrmvxWS4wmE2enSLE",
+    "1uchgW7BAGMv9leQ98oy9RUMkt0XW7DUe",
+    "10_Eb4pzT578nllFnZ0-SK2liN34ywc1g",
+    "1VphJNztoEh4v5cLEGqWnZ_kzCLkLDmHt",
+    "1VqdyQEPe6VzpM7k2aoHrDTYNtn0OI0e0",
+    "14UJOCR3IIGjoxHlqIaEF7YnGV1slQdt8",
+    "1aUtZCBVgA-EGM3kFdvMMS4RBXqrc3zjB"
+        ];
+
+        const galleryContainer = document.getElementById("gallery-container");
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+        const downloadBtn = document.getElementById("download-btn");
+        const closeBtn = document.querySelector(".close");
+        const header = document.querySelector("header");
+
+        // Populate Gallery
+        galleryContainer.innerHTML = imageLinks.map(id => `
+            <div class="image-container">
+                <img src="https://lh3.googleusercontent.com/d/${id}=w500"
+                    data-full="https://lh3.googleusercontent.com/d/${id}=w3000"
+                    data-download="https://drive.google.com/uc?export=download&id=${id}"
+                    class="gallery-image">
+            </div>
+        `).join("");
+
+        // Show Lightbox on Click
+        document.querySelectorAll(".gallery-image").forEach(img => {
+            img.addEventListener("click", function () {
+                lightbox.style.display = "flex";
+                lightboxImg.src = this.dataset.full; // High-Quality Image
+                downloadBtn.href = this.dataset.download; // Full-Resolution Download Link
+                header.style.display = "none"; // Hide Header
+            });
+        });
+
+        // Close Lightbox & Show Header Again
+        closeBtn.addEventListener("click", () => {
+            lightbox.style.display = "none";
+            header.style.display = "flex"; // Show Header Back
+        });
+
+        lightbox.addEventListener("click", (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = "none";
+                header.style.display = "flex"; // Show Header Back
+            }
+        });
+
+        // Hide Header on Scroll
+        let lastScrollTop = 0;
+        window.addEventListener("scroll", function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                header.style.top = "-80px"; // Moves header out of view
+            } else {
+                header.style.top = "0"; // Brings header back
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+</body>
+</html>
