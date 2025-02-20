@@ -249,29 +249,6 @@ main {
     cursor: pointer;
 }
 
-/* === CONTENT SECTION CONTAINER === */
-.section-container {
-    max-width: 1200px;
-    margin: 50px auto;
-    padding: 30px;
-    background-color: rgba(255, 0, 0, 0.1);
-    border: 3px solid red;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.4);
-    transition: transform 0.3s ease-in-out;
-}
-
-/* Remove Red Border & Dark Red Background in Specific Pages */
-.format-page .section-container,
-.gallery-page .section-container {
-    background-color: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-
-.section-container:hover {
-    transform: scale(1.02);
-
 /* Ensure Header Doesn't Overlap Content */
 header {
     z-index: 9999;
@@ -503,5 +480,55 @@ body {
 @media (max-width: 768px) {
     .about-section {
         width: 90%; /* Full-width sections on mobile */
+    }
+}
+
+/* Full-Width Contact Header */
+.contact-header {
+    width: 100%;
+    text-align: center;
+    background-color: #222; /* Same gray as header */
+    color: red;
+    padding: 25px;
+    font-size: 34px;
+    font-weight: bold;
+}
+
+/* Centered Contact Page Layout */
+.contact-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 40px;
+}
+
+/* Gray Box Styling for Contact Section */
+.contact-section {
+    background-color: #222; /* Same gray as header */
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+    width: 60%;
+    text-align: center;
+}
+
+/* Contact Page Links */
+.contact-section a {
+    color: red;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.contact-section a:hover {
+    color: white;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .contact-section {
+        width: 90%;
     }
 }
