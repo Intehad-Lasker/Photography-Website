@@ -615,3 +615,9 @@ body {
     transform: scale(1.02);
     box-shadow: 0px 6px 15px rgba(255, 255, 255, 0.15);
 }
+
+/* Add spacing between header and page title */
+.page-title, .section-container h2 {
+    margin-top: 80px; /* Increase spacing below the header */
+    padding-top: 20px; /* Extra padding to prevent overlap */
+}
