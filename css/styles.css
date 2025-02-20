@@ -231,19 +231,7 @@ main {
     margin-bottom: 15px;
 }
 
-/* Image Styling */
-.gallery-image {
-    width: 100%;
-    border-radius: 10px;
-    transition: box-shadow 0.3s;
-    display: block;
-}
 
-/* Hover Effect - Remove Scaling */
-.gallery-image:hover {
-    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
-    cursor: pointer;
-}
 
 /* Ensure Header Doesn't Overlap Content */
 header {
@@ -539,21 +527,6 @@ body {
     color: white;
 }
 
-
-/* ✅ Fix: Make Hover Effect on Gallery Page Smoother */
-.gallery-image {
-    width: 100%;
-    border-radius: 10px;
-    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out; /* Smooth transition */
-    display: block;
-}
-
-.gallery-image:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
-    cursor: pointer;
-}
-
 /* ✅ Ensure Padding on Mobile Doesn't Break Layout */
 @media (max-width: 768px) {
     .page-title {
@@ -652,13 +625,14 @@ body {
 }
 
 /* Ensure Category Page Images Have the Same Hover Effect as Gallery Images */
-.gallery-container img {
+.gallery-image img {
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out;
     border-radius: 10px; /* Keep corners rounded */
 }
 
-.gallery-container img:hover {
+.gallery-image img:hover {
     transform: scale(1.05); /* Slight zoom effect */
     box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3); /* Same glow effect as gallery */
     border-radius: 10px; /* Keep corners rounded */
 }
+
