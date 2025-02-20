@@ -14,6 +14,20 @@ body {
     box-sizing: border-box;
 }
 
+.gallery-image {
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+    border-radius: 10px; /* Softens the image edges */
+}
+
+.gallery-image:hover {
+    transform: scale(1.1); /* Slight zoom-in effect */
+    opacity: 0.8; /* Slight transparency */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Adds a shadow effect */
+}
+
+
+
 /* === HEADER STYLING === */
 header {
     background-color: #222;
@@ -614,16 +628,4 @@ body {
     box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2); /* Adds subtle depth */
 }
 
-
-.gallery-image {
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    cursor: pointer;
-    border-radius: 10px; /* Softens the image edges */
-}
-
-.gallery-image:hover {
-    transform: scale(1.1); /* Slight zoom-in effect */
-    opacity: 0.8; /* Slight transparency */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Adds a shadow effect */
-}
 
