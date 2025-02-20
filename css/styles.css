@@ -621,3 +621,28 @@ body {
     margin-top: 80px; /* Increase spacing below the header */
     padding-top: 20px; /* Extra padding to prevent overlap */
 }
+
+/* Ensure consistent top spacing for About Me and Contact pages */
+.about-container, .contact-container {
+    margin-top: 80px; /* Keeps spacing uniform */
+    padding-top: 20px; /* Prevents overlap */
+}
+
+/* Left-align text and title on About Me page */
+.about-container h2, .about-section {
+    text-align: left; /* Left aligns both title and text */
+    width: 60%; /* Ensures readability */
+}
+
+/* Center-align Contact page content while keeping spacing */
+.contact-section {
+    text-align: center;
+    width: 60%; /* Keeps same width consistency */
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+    .about-container h2, .about-section, .contact-section {
+        width: 90%; /* Ensures proper spacing on mobile */
+    }
+}
