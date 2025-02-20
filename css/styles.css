@@ -443,3 +443,57 @@ body {
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
 }
+
+/* Full-Width About Me Header */
+.about-header {
+    width: 100%;
+    text-align: center;
+    background-color: red;
+    color: black;
+    padding: 25px;
+    font-size: 34px;
+    font-weight: bold;
+}
+
+/* Centered About Me Sections */
+.about-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px;
+}
+
+/* Red Containers */
+.about-section {
+    background-color: rgba(255, 0, 0, 0.9); /* Red background */
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(255, 0, 0, 0.5);
+    width: 45%; /* Two-column layout */
+    text-align: center;
+}
+
+/* Full width for About Me title */
+.about-section:first-child {
+    width: 100%;
+}
+
+/* Ensure Lists are readable */
+.about-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.about-section ul li {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .about-section {
+        width: 90%; /* Full-width sections on mobile */
+    }
+}
