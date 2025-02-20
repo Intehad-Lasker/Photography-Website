@@ -9,6 +9,7 @@
 <body>
     <header>
         <h1>BazzPhotography</h1>
+        <div class="menu-icon">☰</div> <!-- Mobile Menu Button -->
         <nav>
             <ul>
                 <li><a href="index.html" class="active">Home</a></li>
@@ -30,5 +31,31 @@
     <footer>
         <p>© 2025 BazzPhotography</p>
     </footer>
+
+    <!-- JavaScript for Mobile Menu & Hide Header on Image Expansion -->
+    <script>
+        document.querySelector(".menu-icon").addEventListener("click", function () {
+            document.querySelector("nav ul").classList.toggle("show");
+        });
+
+        let lastScrollTop = 0;
+        const header = document.querySelector("header");
+
+        window.addEventListener("scroll", function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            header.style.top = scrollTop > lastScrollTop ? "-80px" : "0";
+            lastScrollTop = scrollTop;
+        });
+
+        // Hide header when viewing an expanded image
+        document.addEventListener("click", function (event) {
+            if (event.target.classList.contains("gallery-image")) {
+                document.querySelector("header").style.display = "none";
+            }
+            if (event.target.classList.contains("close")) {
+                document.querySelector("header").style.display = "flex";
+            }
+        });
+    </script>
 </body>
 </html>
