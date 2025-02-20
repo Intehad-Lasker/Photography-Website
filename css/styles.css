@@ -232,39 +232,6 @@ main {
     margin: 0 auto;
 }
 
-/* ✅ Ensure Equal Spacing Between Images */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
-    gap: 15px; /* Uniform gap between images (sides & bottom) */
-    max-width: 90%;
-    margin: auto;
-    padding: 20px; /* Consistent padding */
-}
-
-/* ✅ Fix Category Page Image Hover & Formatting */
-.image-container {
-    display: block;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    border-radius: 10px; /* Ensures rounded corners */
-}
-
-.image-container img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 10px; /* Keeps corners rounded */
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out;
-}
-
-/* ✅ Smooth Hover Effect - Keeps Rounded Corners */
-.image-container img:hover {
-    transform: scale(1.05); /* Smooth zoom */
-    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3); /* Soft glow */
-    border-radius: 10px; /* Prevents square edges when zooming */
-}
 
 
 /* Ensure Header Doesn't Overlap Content */
