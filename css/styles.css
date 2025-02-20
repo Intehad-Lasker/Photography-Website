@@ -316,3 +316,21 @@ footer a:hover {
         font-size: 14px;
     }
 }
+
+/* Gallery Page Layout */
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Ensure Images Don’t Stretch */
+.gallery-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+}
