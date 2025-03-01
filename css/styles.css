@@ -673,14 +673,6 @@ html, body {
     z-index: -1;
 }
 
-/* Header and footer adjustments */
-.index-page header, 
-.index-page footer {
-    width: 100%;
-    text-align: center;
-    color: red;
-}
-
 /* Center text content */
 .hero {
     position: relative;
