@@ -689,3 +689,15 @@ body {
     background: rgba(0, 0, 0, 0.5); /* Slight transparency for better readability */
     color: white;
 }
+
+/* Fix footer issue on index.html */
+.index-page footer {
+    background: none;  /* Removes unwanted background */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    color: white;
+}
