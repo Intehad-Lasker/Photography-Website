@@ -4,17 +4,16 @@ exports.handler = async (event) => {
   const { message } = JSON.parse(event.body);
 
   try {
-    // Call OpenAI API
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}` // 🔑 your API key in Netlify
+        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}` // Secure API key
       },
       body: JSON.stringify({
-        model: "gpt-4o-mini",
+        model: "gpt-4o-mini", // lightweight GPT model
         messages: [
-          { role: "system", content: "You are BazzBot, a helpful photography assistant. Suggest images from the gallery when asked." },
+          { role: "system", content: "You are BazzBot, a photography assistant. Help users find photos by tags like car, bike, sunset, etc." },
           { role: "user", content: message }
         ]
       })
@@ -31,7 +30,7 @@ exports.handler = async (event) => {
   } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ reply: "⚠️ Error connecting to AI: " + error.message })
+      body: JSON.stringify({ reply: "⚠️ Error: " + error.message })
     };
   }
 };
