@@ -59,11 +59,20 @@
       appendMessage("user", text);
       input.value = "";
 
-      // Temporary fake reply (for now)
-      setTimeout(() => {
-        appendMessage("bot", "🤖 I'm getting smarter soon! Right now, I'm just a placeholder.");
-      }, 500);
+      try {
+        const response = await fetch("/.netlify/functions/chatbot", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: text })
+        });
+
+        const data = await response.json();
+        appendMessage("bot", data.reply);
+      } catch (error) {
+        appendMessage("bot", "⚠️ Sorry, something went wrong.");
+      }
     });
+
   </script>
 </body>
 </html>
