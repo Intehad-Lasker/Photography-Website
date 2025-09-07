@@ -4,23 +4,23 @@ exports.handler = async (event) => {
   const { message } = JSON.parse(event.body);
 
   try {
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}` // Secure API key
+        "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`  // 🔑
       },
       body: JSON.stringify({
-        model: "gpt-4o-mini", // lightweight GPT model
+        model: "deepseek/deepseek-r1",
         messages: [
-          { role: "system", content: "You are BazzBot, a photography assistant. Help users find photos by tags like car, bike, sunset, etc." },
+          { role: "system", content: "You are BazzBot, a friendly photography assistant. Answer clearly and help users find photos." },
           { role: "user", content: message }
         ]
       })
     });
 
     const data = await response.json();
-    const reply = data.choices[0].message.content;
+    const reply = data.choices?.[0]?.message?.content || "⚠️ No response from model.";
 
     return {
       statusCode: 200,
