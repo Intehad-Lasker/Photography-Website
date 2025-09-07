@@ -1,5 +1,3 @@
-const fetch = require("node-fetch");
-
 exports.handler = async (event) => {
   const { message } = JSON.parse(event.body);
 
@@ -8,26 +6,30 @@ exports.handler = async (event) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`  // 🔑
+        "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`
       },
       body: JSON.stringify({
         model: "deepseek/deepseek-r1",
         messages: [
-          { role: "system", content: "You are BazzBot, a friendly photography assistant. Answer clearly and help users find photos." },
+          { role: "system", content: "You are BazzBot, a helpful photography assistant." },
           { role: "user", content: message }
         ]
       })
     });
 
     const data = await response.json();
-    const reply = data.choices?.[0]?.message?.content || "⚠️ No response from model.";
+
+    if (!data.choices || !data.choices[0]?.message?.content) {
+      throw new Error("Invalid API response: " + JSON.stringify(data));
+    }
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ reply })
+      body: JSON.stringify({ reply: data.choices[0].message.content })
     };
 
   } catch (error) {
+    console.error("Chatbot error:", error);
     return {
       statusCode: 500,
       body: JSON.stringify({ reply: "⚠️ Error: " + error.message })
