@@ -8,19 +8,19 @@ exports.handler = async (event) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`
+        "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`  // 🔑
       },
       body: JSON.stringify({
         model: "deepseek/deepseek-r1",
         messages: [
-          { role: "system", content: "You are BazzBot, a helpful photography assistant. Suggest images by tags like car, bike, sunset, etc." },
+          { role: "system", content: "You are BazzBot, a friendly photography assistant. Answer clearly and help users find photos." },
           { role: "user", content: message }
         ]
       })
     });
 
     const data = await response.json();
-    const reply = data.choices[0].message.content;
+    const reply = data.choices?.[0]?.message?.content || "⚠️ No response from model.";
 
     return {
       statusCode: 200,
@@ -34,4 +34,3 @@ exports.handler = async (event) => {
     };
   }
 };
-
