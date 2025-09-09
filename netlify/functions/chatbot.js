@@ -1,5 +1,4 @@
 // netlify/functions/chatbot.js
-import fetch from "node-fetch"; // Remove if using Node 18+
 import Database from "better-sqlite3";
 import path from "path";
 
@@ -19,6 +18,8 @@ export async function handler(event) {
     const stmt = db.prepare("SELECT * FROM photos WHERE tags LIKE ?");
     const rows = stmt.all(`%${message.toLowerCase()}%`);
 
+    console.log("DB results:", rows);
+
     // ----------------------------
     // 3. AI system prompt
     // ----------------------------
@@ -31,7 +32,7 @@ export async function handler(event) {
     `;
 
     // ----------------------------
-    // 4. Ask AI for a textual reply
+    // 4. Ask AI for a textual reply (using built-in fetch)
     // ----------------------------
     const aiResponse = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
@@ -65,12 +66,13 @@ export async function handler(event) {
       reply += "\n\nHere are some photos:\n";
       rows.forEach(photo => {
         const url = photo.link || `/images/${photo.filename}`;
-        const caption = photo.caption || photo.tags || "Untitled photo";
+        const caption = photo.caption || photo.tags || photo.filename || "Untitled photo";
 
         reply += `<img src="${url}" alt="${caption}" class="chat-thumbnail" />`;
         reply += `<p>${caption}</p>`;
       });
-
+    } else {
+      console.log("No DB matches for:", message);
     }
 
     db.close();
