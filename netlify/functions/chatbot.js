@@ -47,7 +47,7 @@ export async function handler(event) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "deepseek-chat",
+        model: "deepseek/deepseek-chat",
         messages: [
           { role: "system", content: systemPrompt },
           { role: "user", content: message },
