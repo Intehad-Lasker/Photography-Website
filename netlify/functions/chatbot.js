@@ -1,8 +1,7 @@
 // netlify/functions/chatbot.js
 import sqlite3 from "sqlite3";
 import { open } from "sqlite";
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
+import path from "path";
 
 export async function handler(event) {
   try {
@@ -11,10 +10,7 @@ export async function handler(event) {
     // ----------------------------
     // 1. Resolve DB path (relative to this file)
     // ----------------------------
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = dirname(__filename);
-    const dbPath = join(__dirname, "../data/photos.db"); // go up one folder, then into data/
-
+    const dbPath = path.join(__dirname, "../data/photos.db"); 
     const db = await open({
       filename: dbPath,
       driver: sqlite3.Database,
