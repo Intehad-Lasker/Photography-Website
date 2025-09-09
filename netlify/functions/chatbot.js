@@ -49,7 +49,14 @@ export async function handler(event) {
     });
 
     const aiData = await aiResponse.json();
-    let reply = aiData.choices?.[0]?.message?.content || "⚠️ I couldn’t generate a reply.";
+    console.log("AI raw response:", JSON.stringify(aiData, null, 2));
+
+    let reply;
+    if (aiData.choices && aiData.choices[0]?.message?.content) {
+      reply = aiData.choices[0].message.content;
+    } else {
+      reply = "⚠️ I couldn’t generate a reply from the AI.";
+    }
 
     // ----------------------------
     // 5. Append DB results as thumbnails
@@ -57,9 +64,13 @@ export async function handler(event) {
     if (rows.length > 0) {
       reply += "\n\nHere are some photos:\n";
       rows.forEach(photo => {
-        reply += `<img src="${photo.link}" alt="${photo.caption}" class="chat-thumbnail" />`;
-        reply += `<p>${photo.caption}</p>`;
+        const url = photo.link || `/images/${photo.filename}`;
+        const caption = photo.caption || photo.tags || "Untitled photo";
+
+        reply += `<img src="${url}" alt="${caption}" class="chat-thumbnail" />`;
+        reply += `<p>${caption}</p>`;
       });
+
     }
 
     db.close();
