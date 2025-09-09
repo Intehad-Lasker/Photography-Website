@@ -1,16 +1,20 @@
 // netlify/functions/chatbot.js
 import sqlite3 from "sqlite3";
 import { open } from "sqlite";
-import path from "path";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
 
 export async function handler(event) {
   try {
     const { message } = JSON.parse(event.body);
 
     // ----------------------------
-    // 1. Open SQLite database
+    // 1. Resolve DB path (relative to this file)
     // ----------------------------
-    const dbPath = path.join(process.cwd(), "data", "photos.db");
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = dirname(__filename);
+    const dbPath = join(__dirname, "../data/photos.db"); // go up one folder, then into data/
+
     const db = await open({
       filename: dbPath,
       driver: sqlite3.Database,
@@ -38,7 +42,7 @@ export async function handler(event) {
     `;
 
     // ----------------------------
-    // 4. Ask AI for a textual reply (using built-in fetch)
+    // 4. Ask AI for a textual reply
     // ----------------------------
     const aiResponse = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
