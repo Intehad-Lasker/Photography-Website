@@ -1,11 +1,9 @@
 const fetch = require("node-fetch");
 
 exports.handler = async (event) => {
+  const { message } = JSON.parse(event.body);
+
   try {
-    const { message } = JSON.parse(event.body);
-
-    console.log("📌 Loaded API Key:", process.env.OPENROUTER_API_KEY ? "✅ Exists" : "❌ Missing");
-
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -15,25 +13,14 @@ exports.handler = async (event) => {
       body: JSON.stringify({
         model: "deepseek/deepseek-r1",
         messages: [
-          { role: "system", content: "You are BazzBot, a helpful photography assistant." },
+          { role: "system", content: "You are BazzBot, a helpful photography assistant. Suggest images by tags like car, bike, sunset, etc." },
           { role: "user", content: message }
         ]
       })
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("❌ OpenRouter API error:", response.status, errorText);
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ reply: "⚠️ OpenRouter API error. Check logs." })
-      };
-    }
-
     const data = await response.json();
-    console.log("✅ OpenRouter Response:", data);
-
-    const reply = data?.choices?.[0]?.message?.content || "⚠️ No reply from AI.";
+    const reply = data.choices[0].message.content;
 
     return {
       statusCode: 200,
@@ -41,10 +28,9 @@ exports.handler = async (event) => {
     };
 
   } catch (error) {
-    console.error("❌ Chatbot error:", error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ reply: "⚠️ Server error. Please try again later." })
+      body: JSON.stringify({ reply: "⚠️ Error: " + error.message })
     };
   }
 };
