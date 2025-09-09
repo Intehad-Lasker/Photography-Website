@@ -7,18 +7,14 @@ exports.handler = async (event) => {
   const userMessage = message.toLowerCase();
 
   try {
-    // --- 1. Extract keywords for photo search ---
-    const searchKeywords = userMessage
-      .split(" ")
-      .filter((w) => w.length > 2); // filter out "a", "is", "to", etc.
+    // --- 1. Search photos from DB ---
+    const searchKeywords = userMessage.split(" ").filter((w) => w.length > 2);
 
     let photoResults = [];
-
     if (searchKeywords.length > 0) {
       const dbPath = path.resolve("photos.db");
       const db = new sqlite3.Database(dbPath);
 
-      // Build WHERE clause dynamically
       const whereClause = searchKeywords
         .map((kw) => `(tags LIKE '%${kw}%' OR caption LIKE '%${kw}%')`)
         .join(" AND ");
@@ -38,48 +34,40 @@ exports.handler = async (event) => {
       db.close();
     }
 
-    // --- 2. If photos are found, return them ---
+    // --- 2. Build extra context for DeepSeek ---
+    let photoContext = "";
     if (photoResults.length > 0) {
-      const reply = photoResults
-        .map(
-          (r) =>
-            `📸 <b>${r.caption}</b><br><a href="${r.link}" target="_blank">View Photo</a>`
-        )
-        .join("<br><br>");
-
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ reply }),
-      };
+      const formatted = photoResults
+        .map((r) => `• ${r.caption} 👉 ${r.link}`)
+        .join("\n");
+      photoContext = `\nThe following matching photos were found in the database:\n${formatted}`;
     }
 
-    // --- 3. Otherwise, fallback to AI chatbot ---
-    const response = await fetch(
-      "https://openrouter.ai/api/v1/chat/completions",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-        },
-        body: JSON.stringify({
-          model: "deepseek/deepseek-r1",
-          messages: [
-            {
-              role: "system",
-              content:
-                "You are BazzBot, a helpful photography assistant. Keep answers short, clear, and user-friendly.",
-            },
-            { role: "user", content: message },
-          ],
-        }),
-      }
-    );
+    // --- 3. Always call DeepSeek ---
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: "deepseek/deepseek-r1",
+        messages: [
+          {
+            role: "system",
+            content:
+              "You are BazzBot, a photography assistant. Answer naturally, " +
+              "and if photo results are provided, include them in your reply.",
+          },
+          {
+            role: "user",
+            content: `${message}${photoContext}`,
+          },
+        ],
+      }),
+    });
 
     const data = await response.json();
-
-    console.log("🔍 OpenRouter API Response:", JSON.stringify(data, null, 2));
-
     const reply =
       data?.choices?.[0]?.message?.content ||
       "⚠️ Sorry, I couldn’t generate a reply.";
