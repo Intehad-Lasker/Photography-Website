@@ -66,16 +66,28 @@ export async function handler(event) {
     }
 
     // ----------------------------
-    // 5. Append DB results
+    // 5. Append DB results (clickable + downloadable images)
     // ----------------------------
     if (rows.length > 0) {
       reply += "\n\nHere are some photos:\n";
       rows.forEach((photo) => {
-        const url = photo.link || `/images/${photo.filename}`;
+        let url = photo.link || `/images/${photo.filename}`;
         const caption = photo.caption || photo.tags || photo.filename || "Untitled photo";
 
-        reply += `<img src="${url}" alt="${caption}" class="chat-thumbnail" />`;
-        reply += `<p>${caption}</p>`;
+        // If it's a Google Drive "file/d/.../view" link, convert to direct link
+        if (url.includes("drive.google.com/file/d/")) {
+          const match = url.match(/\/d\/(.*?)\//);
+          if (match && match[1]) {
+            url = `https://drive.google.com/uc?export=download&id=${match[1]}`;
+          }
+        }
+
+        reply += `
+          <a href="${url}" target="_blank" download>
+            <img src="${url}" alt="${caption}" class="chat-thumbnail" />
+          </a>
+          <p>${caption}</p>
+        `;
       });
     }
 
