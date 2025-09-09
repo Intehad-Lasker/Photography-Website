@@ -64,10 +64,11 @@ export async function handler(event) {
         let url = photo.link || `/images/${photo.filename}`;
         const caption = photo.caption || photo.tags || photo.filename || "Untitled photo";
 
+        // ✅ Convert Google Drive "view" link → direct image link
         if (url.includes("drive.google.com/file/d/")) {
-          const match = url.match(/\/d\/(.*?)\//);
+          const match = url.match(/\/d\/([^/]+)\//);
           if (match && match[1]) {
-            url = `https://drive.google.com/uc?export=download&id=${match[1]}`;
+            url = `https://drive.google.com/uc?export=view&id=${match[1]}`;
           }
         }
 
