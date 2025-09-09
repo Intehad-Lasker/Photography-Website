@@ -25,13 +25,17 @@ export async function handler(event) {
     // 3. System prompt
     const systemPrompt = `
     You are BazzBot 📸, a photography assistant.
-    - Only answer questions related to photography, cameras, techniques, or Bazz's portfolio.
-    - If asked non-photography questions, politely decline.
-    - Always reply in concise "DeepSeek" style.
-    - If relevant images are found in the database, include them as <img> thumbnails with captions.
+    - Your MAIN objective is to show relevant photos from Bazz's database.
+    - For every user request:
+      1. Retrieve matching photos from the DB.
+      2. Present them as: thumbnail + cleaned caption + green "Download" button.
+    - Clean and rewrite captions to be short, clear, and photography-friendly.
+    - Only add text commentary if helpful, but photos are ALWAYS the main output.
+    - Do NOT generate your own <img> tags or Markdown images.
+    - Answer photopgraphy related questions if asked
     `;
 
-    // 4. Call DeepSeek via OpenRouter
+    // 4. Call DeepSeek for text response
     const aiResponse = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -53,18 +57,22 @@ export async function handler(event) {
     let reply;
     if (aiData.choices && aiData.choices[0]?.message?.content) {
       reply = aiData.choices[0].message.content;
+
+      // 🚫 Strip any rogue <img> or markdown from DeepSeek
+      reply = reply.replace(/!\[.*?\]\(.*?\)/g, "");
+      reply = reply.replace(/<img[^>]*>/g, "");
     } else {
-      reply = "⚠️ I couldn’t generate a reply from DeepSeek.";
+      reply = "⚠️ I couldn’t generate a reply";
     }
 
-    // 5. Append DB results
+    // 5. Append DB results (with thumbnails + modal support + download button)
     if (rows.length > 0) {
       reply += "\n\nHere are some photos:\n";
       rows.forEach((photo) => {
         let url = photo.link || `/images/${photo.filename}`;
-        const caption = photo.caption || photo.tags || photo.filename || "Untitled photo";
+        let caption = photo.caption || photo.tags || photo.filename || "Untitled photo";
 
-        // ✅ Convert Google Drive "view" link → direct image link
+        // Convert Google Drive link → direct image
         if (url.includes("drive.google.com/file/d/")) {
           const match = url.match(/\/d\/([^/]+)\//);
           if (match && match[1]) {
@@ -72,13 +80,19 @@ export async function handler(event) {
           }
         }
 
+        // ✅ Structured preview + download button
         reply += `
-          <img 
-            src="${url}" 
-            alt="${caption}" 
-            class="chat-thumbnail"
-          />
-          <p>${caption}</p>
+          <div class="photo-block">
+            <img 
+              src="${url}" 
+              alt="${caption}" 
+              class="chat-thumbnail"
+              data-full="${url}"
+              data-caption="${caption}"
+            />
+            <p>${caption}</p>
+            <a href="${url}" download class="download-btn">⬇ Download</a>
+          </div>
         `;
       });
     }
