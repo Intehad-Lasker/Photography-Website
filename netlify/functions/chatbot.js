@@ -1,5 +1,6 @@
 // netlify/functions/chatbot.js
-import Database from "better-sqlite3";
+import sqlite3 from "sqlite3";
+import { open } from "sqlite";
 import path from "path";
 
 export async function handler(event) {
@@ -7,16 +8,21 @@ export async function handler(event) {
     const { message } = JSON.parse(event.body);
 
     // ----------------------------
-    // 1. Connect to SQLite database
+    // 1. Open SQLite database
     // ----------------------------
-    const dbPath = path.resolve("data/photos.db"); // adjust if stored elsewhere
-    const db = new Database(dbPath);
+    const dbPath = path.join(process.cwd(), "data", "photos.db");
+    const db = await open({
+      filename: dbPath,
+      driver: sqlite3.Database,
+    });
 
     // ----------------------------
-    // 2. Search DB for matching tags
+    // 2. Query tags from DB
     // ----------------------------
-    const stmt = db.prepare("SELECT * FROM photos WHERE tags LIKE ?");
-    const rows = stmt.all(`%${message.toLowerCase()}%`);
+    const rows = await db.all(
+      "SELECT * FROM photos WHERE tags LIKE ?",
+      [`%${message.toLowerCase()}%`]
+    );
 
     console.log("DB results:", rows);
 
@@ -38,15 +44,15 @@ export async function handler(event) {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         model: "gpt-4o-mini",
         messages: [
           { role: "system", content: systemPrompt },
-          { role: "user", content: message }
-        ]
-      })
+          { role: "user", content: message },
+        ],
+      }),
     });
 
     const aiData = await aiResponse.json();
@@ -64,7 +70,7 @@ export async function handler(event) {
     // ----------------------------
     if (rows.length > 0) {
       reply += "\n\nHere are some photos:\n";
-      rows.forEach(photo => {
+      rows.forEach((photo) => {
         const url = photo.link || `/images/${photo.filename}`;
         const caption = photo.caption || photo.tags || photo.filename || "Untitled photo";
 
@@ -75,17 +81,17 @@ export async function handler(event) {
       console.log("No DB matches for:", message);
     }
 
-    db.close();
+    await db.close();
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ reply })
+      body: JSON.stringify({ reply }),
     };
   } catch (err) {
     console.error("Error in chatbot.js:", err);
     return {
       statusCode: 500,
-      body: JSON.stringify({ reply: "⚠️ Something went wrong." })
+      body: JSON.stringify({ reply: "⚠️ Something went wrong." }),
     };
   }
 }
