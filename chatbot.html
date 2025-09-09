@@ -1,78 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bazz Chatbot</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <style>
-    body { background: #111; color: #fff; font-family: Arial, sans-serif; text-align: center; }
-    #chat-container { width: 80%; max-width: 600px; margin: 50px auto; background: #222; border-radius: 10px; padding: 20px; box-shadow: 0 0 15px rgba(0,0,0,0.5); }
-    #messages { height: 400px; overflow-y: auto; border: 1px solid #333; border-radius: 5px; padding: 10px; background: #000; text-align: left; }
-    .msg { margin: 5px 0; padding: 8px; border-radius: 5px; }
-    .user { background: #444; text-align: right; }
-    .bot { background: #b30000; }
-    #input-container { margin-top: 10px; display: flex; }
-    #user-input { flex: 1; padding: 10px; border: none; border-radius: 5px; }
-    #send-btn { padding: 10px; border: none; background: red; color: white; font-weight: bold; cursor: pointer; border-radius: 5px; margin-left: 5px; }
-    img.chat-thumbnail { max-width: 200px; border-radius: 8px; margin-top: 5px; display: block; }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>BazzPhotography</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="chatbot.html" class="active">Chatbot</a></li>
-      </ul>
-    </nav>
-  </header>
+<script>
+  const messagesDiv = document.getElementById("messages");
+  const input = document.getElementById("user-input");
+  const sendBtn = document.getElementById("send-btn");
 
-  <div id="chat-container">
-    <h2>Ask BazzBot 📸</h2>
-    <div id="messages"></div>
-    <div id="input-container">
-      <input type="text" id="user-input" placeholder="Type your question...">
-      <button id="send-btn">Send</button>
-    </div>
-  </div>
+  function appendMessage(sender, text) {
+    const div = document.createElement("div");
+    div.classList.add("msg", sender);
+    div.innerHTML = text; // ✅ allow HTML
+    messagesDiv.appendChild(div);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+  }
 
-  <script>
-    const messagesDiv = document.getElementById("messages");
-    const input = document.getElementById("user-input");
-    const sendBtn = document.getElementById("send-btn");
+  async function sendMessage() {
+    const text = input.value.trim();
+    if (!text) return;
+    appendMessage("user", text);
+    input.value = "";
 
-    function appendMessage(sender, text) {
-      const div = document.createElement("div");
-      div.classList.add("msg", sender);
-      div.innerHTML = text; // ✅ allow HTML (for captions + thumbnails)
-      messagesDiv.appendChild(div);
-      messagesDiv.scrollTop = messagesDiv.scrollHeight;
-    }
+    try {
+      const response = await fetch("/.netlify/functions/chatbot", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text })
+      });
 
-    sendBtn.addEventListener("click", async () => {
-      const text = input.value.trim();
-      if (!text) return;
-      appendMessage("user", text);
-      input.value = "";
-
-      try {
-        const response = await fetch("/.netlify/functions/chatbot", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: text })
-        });
-
-        const data = await response.json();
-        appendMessage("bot", data.reply);
-      } catch (error) {
-        appendMessage("bot", "⚠️ Sorry, something went wrong.");
+      if (!response.ok) {
+        const errorText = await response.text();
+        appendMessage("bot", `⚠️ Server error: ${errorText}`);
+        return;
       }
-    });
-  </script>
-</body>
-</html>
+
+      const data = await response.json();
+      if (data.reply) {
+        appendMessage("bot", data.reply);
+      } else {
+        appendMessage("bot", "⚠️ No reply received from server.");
+      }
+    } catch (error) {
+      console.error("Frontend error:", error);
+      appendMessage("bot", "⚠️ Sorry, something went wrong.");
+    }
+  }
+
+  sendBtn.addEventListener("click", sendMessage);
+  input.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") sendMessage();
+  });
+</script>
