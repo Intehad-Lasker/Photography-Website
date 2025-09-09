@@ -8,16 +8,16 @@ export async function handler(event) {
     const { message } = JSON.parse(event.body);
 
     // ----------------------------
-    // 1. Resolve DB path (relative to this file)
+    // 1. Resolve DB path
     // ----------------------------
-    const dbPath = path.join(__dirname, "../data/photos.db"); 
+    const dbPath = path.join(__dirname, "../data/photos.db");
     const db = await open({
       filename: dbPath,
       driver: sqlite3.Database,
     });
 
     // ----------------------------
-    // 2. Query tags from DB
+    // 2. Query DB for matches
     // ----------------------------
     const rows = await db.all(
       "SELECT * FROM photos WHERE tags LIKE ?",
@@ -27,7 +27,7 @@ export async function handler(event) {
     console.log("DB results:", rows);
 
     // ----------------------------
-    // 3. AI system prompt
+    // 3. System prompt
     // ----------------------------
     const systemPrompt = `
     You are BazzBot 📸, a photography assistant.
@@ -38,16 +38,16 @@ export async function handler(event) {
     `;
 
     // ----------------------------
-    // 4. Ask AI for a textual reply
+    // 4. Call DeepSeek via OpenRouter
     // ----------------------------
-    const aiResponse = await fetch("https://api.openai.com/v1/chat/completions", {
+    const aiResponse = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
+        "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "gpt-4o-mini",
+        model: "deepseek-chat",
         messages: [
           { role: "system", content: systemPrompt },
           { role: "user", content: message },
@@ -62,11 +62,11 @@ export async function handler(event) {
     if (aiData.choices && aiData.choices[0]?.message?.content) {
       reply = aiData.choices[0].message.content;
     } else {
-      reply = "⚠️ I couldn’t generate a reply from the AI.";
+      reply = "⚠️ I couldn’t generate a reply from DeepSeek.";
     }
 
     // ----------------------------
-    // 5. Append DB results as thumbnails
+    // 5. Append DB results
     // ----------------------------
     if (rows.length > 0) {
       reply += "\n\nHere are some photos:\n";
@@ -77,8 +77,6 @@ export async function handler(event) {
         reply += `<img src="${url}" alt="${caption}" class="chat-thumbnail" />`;
         reply += `<p>${caption}</p>`;
       });
-    } else {
-      console.log("No DB matches for:", message);
     }
 
     await db.close();
