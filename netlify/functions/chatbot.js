@@ -7,18 +7,14 @@ export async function handler(event) {
   try {
     const { message } = JSON.parse(event.body);
 
-    // ----------------------------
     // 1. Resolve DB path
-    // ----------------------------
     const dbPath = path.join(__dirname, "../data/photos.db");
     const db = await open({
       filename: dbPath,
       driver: sqlite3.Database,
     });
 
-    // ----------------------------
-    // 2. Query DB for matches
-    // ----------------------------
+    // 2. Query DB
     const rows = await db.all(
       "SELECT * FROM photos WHERE tags LIKE ?",
       [`%${message.toLowerCase()}%`]
@@ -26,9 +22,7 @@ export async function handler(event) {
 
     console.log("DB results:", rows);
 
-    // ----------------------------
     // 3. System prompt
-    // ----------------------------
     const systemPrompt = `
     You are BazzBot 📸, a photography assistant.
     - Only answer questions related to photography, cameras, techniques, or Bazz's portfolio.
@@ -37,9 +31,7 @@ export async function handler(event) {
     - If relevant images are found in the database, include them as <img> thumbnails with captions.
     `;
 
-    // ----------------------------
     // 4. Call DeepSeek via OpenRouter
-    // ----------------------------
     const aiResponse = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -65,16 +57,13 @@ export async function handler(event) {
       reply = "⚠️ I couldn’t generate a reply from DeepSeek.";
     }
 
-    // ----------------------------
-    // 5. Append DB results (clickable + downloadable images)
-    // ----------------------------
+    // 5. Append DB results
     if (rows.length > 0) {
       reply += "\n\nHere are some photos:\n";
       rows.forEach((photo) => {
         let url = photo.link || `/images/${photo.filename}`;
         const caption = photo.caption || photo.tags || photo.filename || "Untitled photo";
 
-        // If it's a Google Drive "file/d/.../view" link, convert to direct link
         if (url.includes("drive.google.com/file/d/")) {
           const match = url.match(/\/d\/(.*?)\//);
           if (match && match[1]) {
@@ -83,9 +72,11 @@ export async function handler(event) {
         }
 
         reply += `
-          <a href="${url}" target="_blank" download>
-            <img src="${url}" alt="${caption}" class="chat-thumbnail" />
-          </a>
+          <img 
+            src="${url}" 
+            alt="${caption}" 
+            class="chat-thumbnail"
+          />
           <p>${caption}</p>
         `;
       });
