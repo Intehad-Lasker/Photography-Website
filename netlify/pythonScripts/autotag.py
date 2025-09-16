@@ -6,7 +6,7 @@ from transformers import CLIPProcessor, CLIPModel
 from transformers import BlipProcessor, BlipForConditionalGeneration
 from PIL import Image
 
-# ------------------ Load Models ------------------
+# ------------------ Load Models ------------------casn 
 clip_model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
 clip_processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
 
